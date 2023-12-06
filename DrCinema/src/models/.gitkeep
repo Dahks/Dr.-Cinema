@@ -1,0 +1,84 @@
+import "react-native-get-random-values";
+import { v4 } from "uuid";
+
+interface Contact {
+  id: string;
+  name: string;
+  phone: string;
+  photo: string;
+  filename: string;
+}
+
+export const contactSort = (a: Contact, b: Contact): number => {
+  const aName = a.name.toLowerCase();
+  const bName = b.name.toLowerCase();
+
+  return aName < bName ? -1 : 1;
+};
+
+export const toContact = (json: string, file: string): Contact => {
+  const newContact: Contact = JSON.parse(json);
+  newContact.filename = file;
+  return newContact;
+};
+
+export const toJson = (contact: Contact): string => {
+  const json = {
+    id: contact.id,
+    name: contact.name,
+    phone: contact.phone,
+    photo: contact.photo,
+  };
+
+  return JSON.stringify(json);
+};
+
+export const createBlankContact = (): Contact => {
+  const blankContact: Contact = {
+    id: "",
+    name: "",
+    phone: "",
+    photo:
+      "https://www.pngkey.com/png/detail/230-2301779_best-classified-apps-default-user-profile.png",
+    filename: "",
+  };
+  return blankContact;
+};
+
+export const isBlank = (contact: Contact): boolean => {
+  return (
+    contact.id === "" &&
+    contact.name === "" &&
+    contact.phone === "" &&
+    contact.filename === ""
+  );
+};
+
+export const calculateFilename = (contact: Contact): void => {
+  const mappings = {
+    á: "a",
+    é: "e",
+    ð: "d",
+    í: "i",
+    ó: "o",
+    ú: "u",
+    ý: "y",
+    þ: "th",
+    æ: "ae",
+    ö: "o",
+    // Add more mappings as needed
+  };
+
+  contact.filename = `${contact.name
+    .toLowerCase()
+    .replace(" ", "_")
+    .replace(/[^A-Za-z0-9]/g, (char) => mappings[char] || char)}-${
+    contact.id
+  }.json`;
+};
+
+export const generateId = (contact: Contact) => {
+  contact.id = v4();
+};
+
+export default Contact;
