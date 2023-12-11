@@ -1,22 +1,23 @@
 import { Button, View } from "react-native";
 import React, { useState } from "react";
-import Txt from "../../components/Txt";
+
 import { type HomeProps } from "../../routes";
+import Txt from "../../components/Txt";
 import styles from "../../styles/styles";
-import { useDispatch, useSelector } from "react-redux";
 import {
   decremenetCounter,
   incrementCounter,
 } from "../../redux/features/counter/counterSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 
 const Home = ({ navigation, route }: HomeProps) => {
-  const dispatch = useDispatch();
-  const counter = useSelector((state) => state.counter.value);
+  const dispatch = useAppDispatch();
+  const counter = useAppSelector((state) => state.counter.value);
 
   return (
     <View>
       <Txt>Home screen</Txt>
-      <Txt>{counter}</Txt>
+      <Txt>{`${counter}`}</Txt>
       <View
         style={{
           display: "flex",
