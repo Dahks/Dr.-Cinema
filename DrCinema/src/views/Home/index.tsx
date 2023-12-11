@@ -4,7 +4,10 @@ import Txt from "../../components/Txt";
 import { type HomeProps } from "../../routes";
 import styles from "../../styles/styles";
 import { useDispatch, useSelector } from "react-redux";
-import { incrementCounter } from "../../redux/features/counter/counterSlice";
+import {
+  decremenetCounter,
+  incrementCounter,
+} from "../../redux/features/counter/counterSlice";
 
 const Home = ({ navigation, route }: HomeProps) => {
   const dispatch = useDispatch();
@@ -13,20 +16,34 @@ const Home = ({ navigation, route }: HomeProps) => {
   return (
     <View>
       <Txt>Home screen</Txt>
+      <Txt>{counter}</Txt>
       <View
         style={{
           display: "flex",
-          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "row",
+          gap: 8,
         }}
       >
         <View
-          style={{ width: 80, backgroundColor: "#222232", borderRadius: 12 }}
+          style={{ width: 120, backgroundColor: "#222232", borderRadius: 12 }}
         >
           <Button
             color={"#fff"}
-            title={`${counter}`}
+            title={"increment"}
             onPress={() => {
               dispatch(incrementCounter());
+            }}
+          />
+        </View>
+        <View
+          style={{ width: 120, backgroundColor: "#222232", borderRadius: 12 }}
+        >
+          <Button
+            color={"#fff"}
+            title={"decrement"}
+            onPress={() => {
+              dispatch(decremenetCounter());
             }}
           />
         </View>
