@@ -3,9 +3,13 @@ import React, { useState } from "react";
 import Txt from "../../components/Txt";
 import { type HomeProps } from "../../routes";
 import styles from "../../styles/styles";
+import { useDispatch, useSelector } from "react-redux";
+import { incrementCounter } from "../../redux/features/counter/counterSlice";
 
 const Home = ({ navigation, route }: HomeProps) => {
-  const [counter, setCounter] = useState<number>(0);
+  const dispatch = useDispatch();
+  const counter = useSelector((state) => state.counter.value);
+
   return (
     <View>
       <Txt>Home screen</Txt>
@@ -22,7 +26,7 @@ const Home = ({ navigation, route }: HomeProps) => {
             color={"#fff"}
             title={`${counter}`}
             onPress={() => {
-              setCounter(counter + 1);
+              dispatch(incrementCounter());
             }}
           />
         </View>
