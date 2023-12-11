@@ -3,3 +3,5 @@
 
 # Specify files that should have LF line endings
 *.js text eol=lf
+*.tsx text eol=lf
+*.ts text eol=lf

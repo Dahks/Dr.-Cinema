@@ -6,7 +6,7 @@ import {
 } from "@react-navigation/stack";
 
 import Home from "../views/Home";
-import OtherWindow from "../views/OtherWindow";
+import OtherWindow from "../views/otherWindow";
 import { darkest, white } from "../styles/colors";
 
 // eslint-disable-next-line
