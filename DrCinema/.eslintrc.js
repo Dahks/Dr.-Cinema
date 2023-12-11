@@ -4,7 +4,7 @@ module.exports = {
     node: true,
   },
   extends: [
-    "standard-with-typescript",
+    // "standard-with-typescript",
     "plugin:react/recommended",
     "plugin:prettier/recommended",
   ],
@@ -27,12 +27,12 @@ module.exports = {
   rules: {
     "@typescript-eslint/semi": ["error", "always"], // Enforce semicolons at the end of lines
     // "semi": ["error", "always"], // This line enforces the use of semicolons
-    "@typescript-eslint/comma-dangle": ["error", "only-multiline"],
-    "@typescript-eslint/quotes": ["error", "double", { avoidEscape: true }],
-    "@typescript-eslint/no-unused-vars": "off",
-    "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/strict-boolean-expressions": "off",
-    "@typescript-eslint/return-await": ["error", "in-try-catch"],
-    "prettier/prettier": "error",
+    // "@typescript-eslint/comma-dangle": ["error", "only-multiline"],
+    // "@typescript-eslint/quotes": ["error", "double", { avoidEscape: true }],
+    // "@typescript-eslint/no-unused-vars": "off",
+    // "@typescript-eslint/explicit-function-return-type": "off",
+    // "@typescript-eslint/strict-boolean-expressions": "off",
+    // "@typescript-eslint/return-await": ["error", "in-try-catch"],
+    // "prettier/prettier": "error",
   },
 };
