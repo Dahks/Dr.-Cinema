@@ -24,7 +24,8 @@ const ItemListStyles = StyleSheet.create({
     borderWidth: 3,
     borderRadius: 15,
     height: 100,
-    margin: 15,
-    padding: 10,
+    marginHorizontal: 15,
+    marginVertical: 6,
+    paddingVertical: 10,
   },
 });
