@@ -5,55 +5,122 @@ import {
   type StackNavigationProp,
 } from "@react-navigation/stack";
 
-import Home from "../views/Home";
-import OtherWindow from "../views/otherWindow";
-import { darkest, white } from "../styles/colors";
+import Cinemas from "../views/Cinemas";
+import CinemaDetails from "../views/CinemaDetails";
+import MovieDetails from "../views/MovieDetails";
+import Upcoming from "../views/Upcoming";
+
+import { black, white } from "../styles/colors";
 
 // eslint-disable-next-line
 type RootStackParamList = {
-  Home: undefined,
-  OtherWindow: undefined, // Add parameters here if any
+  Cinemas: undefined,
+  CinemaDetails: undefined,
+  MovieDetails: undefined,
+  Upcoming: undefined,
 };
 
-type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, "Home">;
-type HomeScreenRouteProp = RouteProp<RootStackParamList, "Home">;
+type CinemasNavigationProp = StackNavigationProp<RootStackParamList, "Cinemas">;
+type CinemasRouteProp = RouteProp<RootStackParamList, "Cinemas">;
 
 // eslint-disable-next-line
-export type HomeProps = {
-  navigation: HomeScreenNavigationProp,
-  route: HomeScreenRouteProp,
+export type CinemasProps = {
+  navigation: CinemasNavigationProp,
+  route: CinemasRouteProp,
 };
 
-type OtherWindowNavigationProp = StackNavigationProp<
+type CinemaDetailsNavigationProp = StackNavigationProp<
   RootStackParamList,
-  "OtherWindow"
+  "CinemaDetails",
 >;
+type CinemaDetailsRouteProp = RouteProp<RootStackParamList, "CinemaDetails">;
+// eslint-disable-next-line
+export type CinemaDetailsProps = {
+  navigation: CinemaDetailsNavigationProp,
+  route: CinemaDetailsRouteProp,
+};
 
-type OtherWindowRouteProp = RouteProp<RootStackParamList, "OtherWindow">;
+type MovieDetailsNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "MovieDetails",
+>;
+type MovieDetailsRouteProp = RouteProp<RootStackParamList, "MovieDetails">;
 
 // eslint-disable-next-line
-export type OtherWindowProps = {
-  navigation: OtherWindowNavigationProp,
-  route: OtherWindowRouteProp,
+export type MovieDetailsProps = {
+  navigation: MovieDetailsNavigationProp,
+  route: MovieDetailsRouteProp,
+};
+
+type UpcomingNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "Upcoming",
+>;
+type UpcomingRouteProp = RouteProp<RootStackParamList, "Upcoming">;
+
+// eslint-disable-next-line
+export type UpcomingProps = {
+  navigation: UpcomingNavigationProp,
+  route: UpcomingRouteProp,
 };
 
 const Stack = createStackNavigator();
 
 const Routes = (): JSX.Element => (
   <NavigationContainer>
-    <Stack.Navigator initialRouteName="Home">
+    <Stack.Navigator
+      initialRouteName="Cinemas"
+      screenOptions={
+        {
+          // headerTransparent: true,
+          // headerShadowVisible: true,
+        }
+      }
+    >
       <Stack.Screen
-        name="Home"
-        component={Home}
+        name="Cinemas"
+        component={Cinemas}
         options={{
-          title: "Home",
+          title: "Cinemas",
           headerStyle: {
-            backgroundColor: darkest,
+            backgroundColor: black,
           },
           headerTintColor: white,
         }}
       />
-      <Stack.Screen name="OtherWindow" component={OtherWindow} />
+      <Stack.Screen
+        name="CinemaDetails"
+        component={CinemaDetails}
+        options={{
+          title: "Cinema Details",
+          headerStyle: {
+            backgroundColor: black,
+          },
+          headerTintColor: white,
+        }}
+      />
+      <Stack.Screen
+        name="MovieDetails"
+        component={MovieDetails}
+        options={{
+          title: "Movie Details",
+          headerStyle: {
+            backgroundColor: black,
+          },
+          headerTintColor: white,
+        }}
+      />
+      <Stack.Screen
+        name="Upcoming"
+        component={Upcoming}
+        options={{
+          title: "Upcoming Movies",
+          headerStyle: {
+            backgroundColor: black,
+          },
+          headerTintColor: white,
+        }}
+      />
     </Stack.Navigator>
   </NavigationContainer>
 );

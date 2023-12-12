@@ -1,0 +1,1 @@
+/* Modal to view details of an upcoming movie. */

@@ -1,31 +1,24 @@
+import { StyleSheet, View } from "react-native";
 import React from "react";
-import { View, StyleSheet } from "react-native";
 import Txt from "./Txt";
-import { Cinema } from "../models/Cinema";
-import { dark } from "../styles/colors";
+import { qwhite } from "../styles/colors";
+import ListItem from "./ListItem";
+import type { Cinema } from "../models/Cinema";
 
-type Props = {
-  cinema: Cinema,
-};
+interface Props {
+  onPress: any;
+  cinema: Cinema;
+}
 
-const CinemaItem = ({ cinema }: Props) => {
+const CinemaItem = ({ onPress, cinema }: Props) => {
   return (
-    <View style={styles.container}>
-      <Txt color="#FFF">{`${cinema.name}`}</Txt>
-      <Txt color="#FFF">{cinema.phone}</Txt>
-      {/* <Txt></Txt> */}
-      {/* <Txt></Txt> */}
-    </View>
+    <ListItem onPress={onPress}>
+      <Txt size="Huge">{cinema.name}</Txt>
+      <Txt size="Small" color={qwhite}>
+        {cinema.websiteUrl}
+      </Txt>
+    </ListItem>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: dark,
-    borderRadius: 8,
-    padding: 8,
-    marginHorizontal: 16,
-  },
-});
 
 export default CinemaItem;
