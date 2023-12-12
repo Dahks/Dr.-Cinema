@@ -68,7 +68,15 @@ const Stack = createStackNavigator();
 
 const Routes = (): JSX.Element => (
   <NavigationContainer>
-    <Stack.Navigator initialRouteName="Cinemas">
+    <Stack.Navigator
+      initialRouteName="Cinemas"
+      screenOptions={
+        {
+          // headerTransparent: true,
+          // headerShadowVisible: true,
+        }
+      }
+    >
       <Stack.Screen
         name="Cinemas"
         component={Cinemas}
@@ -80,9 +88,39 @@ const Routes = (): JSX.Element => (
           headerTintColor: white,
         }}
       />
-      <Stack.Screen name="CinemaDetails" component={CinemaDetails} />
-      <Stack.Screen name="MovieDetails" component={MovieDetails} />
-      <Stack.Screen name="Upcoming" component={Upcoming} />
+      <Stack.Screen
+        name="CinemaDetails"
+        component={CinemaDetails}
+        options={{
+          title: "Cinema Details",
+          headerStyle: {
+            backgroundColor: black,
+          },
+          headerTintColor: white,
+        }}
+      />
+      <Stack.Screen
+        name="MovieDetails"
+        component={MovieDetails}
+        options={{
+          title: "Movie Details",
+          headerStyle: {
+            backgroundColor: black,
+          },
+          headerTintColor: white,
+        }}
+      />
+      <Stack.Screen
+        name="Upcoming"
+        component={Upcoming}
+        options={{
+          title: "Upcoming Movies",
+          headerStyle: {
+            backgroundColor: black,
+          },
+          headerTintColor: white,
+        }}
+      />
     </Stack.Navigator>
   </NavigationContainer>
 );

@@ -1,8 +1,15 @@
-import { Button, View, Text, TouchableHighlight } from "react-native";
+import {
+  Button,
+  StatusBar,
+  View,
+  SafeAreaView,
+  Text,
+  TouchableHighlight,
+} from "react-native";
 import React from "react";
 import Txt from "../../components/Txt";
 import { type CinemasProps } from "../../routes";
-import { white } from "../../styles/colors";
+import { black, white } from "../../styles/colors";
 
 import {
   decremenetCounter,
@@ -14,8 +21,9 @@ import CinemaItem from "../../components/CinemaItem";
 const Cinemas = ({ navigation, route }: CinemasProps) => {
   const dispatch = useAppDispatch();
   const counter = useAppSelector((state) => state.counter.value);
+  StatusBar.setBarStyle("light-content", true);
   return (
-    <View style={{ backgroundColor: "#000", display: "flex", flex: 1 }}>
+    <SafeAreaView style={{ backgroundColor: black, display: "flex", flex: 1 }}>
       <View>
         <Text style={{ color: white }}>{`${counter}`}</Text>
         <View
@@ -76,7 +84,7 @@ const Cinemas = ({ navigation, route }: CinemasProps) => {
       >
         <Text style={{ color: white }}>Upcoming Movies</Text>
       </TouchableHighlight>
-    </View>
+    </SafeAreaView>
   );
 };
 
