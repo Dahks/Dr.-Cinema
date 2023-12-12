@@ -4,11 +4,50 @@ import Txt from "../../components/Txt";
 import { type CinemasProps } from "../../routes";
 import { white } from "../../styles/colors";
 
+import {
+  decremenetCounter,
+  incrementCounter,
+} from "../../redux/features/counter/counterSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+
 const Cinemas = ({ navigation, route }: CinemasProps) => {
+  const dispatch = useAppDispatch();
+  const counter = useAppSelector((state) => state.counter.value);
   return (
     <View style={{backgroundColor: "#000", display: "flex", flex: 1}}>
       <View>
-        <Txt>... Cinemas ...</Txt>
+        <Text style={{color: white}}>{`${counter}`}</Text>
+      <View
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          flexDirection: "row",
+          gap: 8,
+        }}
+      >
+        <View
+          style={{ width: 120, backgroundColor: "#222232", borderRadius: 12 }}
+        >
+          <Button
+            color={"#fff"}
+            title={"increment"}
+            onPress={() => {
+              dispatch(incrementCounter());
+            }}
+          />
+        </View>
+        <View
+          style={{ width: 120, backgroundColor: "#222232", borderRadius: 12 }}
+        >
+          <Button
+            color={"#fff"}
+            title={"decrement"}
+            onPress={() => {
+              dispatch(decremenetCounter());
+            }}
+          />
+        </View>
+      </View>
         <Button
           title="Go to CinemaDetails"
           onPress={() => {
