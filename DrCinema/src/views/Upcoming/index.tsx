@@ -1,4 +1,4 @@
-import { Button, View } from "react-native";
+import { Button, StatusBar, View, SafeAreaView } from "react-native";
 import React from "react";
 import Txt from "../../components/Txt";
 import {
@@ -7,13 +7,14 @@ import {
 } from "../../redux/features/counter/counterSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { type UpcomingProps } from "../../routes";
+import styles from "../../styles/styles";
 
 const Upcoming = ({ navigation, route }: UpcomingProps) => {
-  
-    const dispatch = useAppDispatch();
-    const counter = useAppSelector((state) => state.counter.value);
+  StatusBar.setBarStyle("light-content", true);
+  const dispatch = useAppDispatch();
+  const counter = useAppSelector((state) => state.counter.value);
   return (
-    <View>
+    <SafeAreaView style={styles.containerBackground}>
       <Txt>... Upcoming movies ...</Txt>
       <Txt>{`${counter}`}</Txt>
       <View
@@ -53,7 +54,7 @@ const Upcoming = ({ navigation, route }: UpcomingProps) => {
           navigation.goBack();
         }}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 

@@ -1,11 +1,13 @@
-import { Button, View } from "react-native";
+import { Button, View, StatusBar, SafeAreaView } from "react-native";
 import React from "react";
 import Txt from "../../components/Txt";
 import { type CinemaDetailsProps } from "../../routes";
+import styles from "../../styles/styles";
 
 const CinemaDetails = ({ navigation, route }: CinemaDetailsProps) => {
+  StatusBar.setBarStyle("light-content", true);
   return (
-    <View>
+    <SafeAreaView style={styles.containerBackground}>
       <Txt>Cinema Details</Txt>
       <Button
         title="Go to Movie Details"
@@ -19,7 +21,7 @@ const CinemaDetails = ({ navigation, route }: CinemaDetailsProps) => {
           navigation.goBack();
         }}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 

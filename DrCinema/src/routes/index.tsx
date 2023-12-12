@@ -10,7 +10,7 @@ import CinemaDetails from "../views/CinemaDetails";
 import MovieDetails from "../views/MovieDetails";
 import Upcoming from "../views/Upcoming";
 
-import { darkest, white } from "../styles/colors";
+import { black, darkest, white } from "../styles/colors";
 
 // eslint-disable-next-line
 type RootStackParamList = {
@@ -68,21 +68,59 @@ const Stack = createStackNavigator();
 
 const Routes = (): JSX.Element => (
   <NavigationContainer>
-    <Stack.Navigator initialRouteName="Cinemas">
+    <Stack.Navigator
+      initialRouteName="Cinemas"
+      screenOptions={
+        {
+          // headerTransparent: true,
+          // headerShadowVisible: true,
+        }
+      }
+    >
       <Stack.Screen
         name="Cinemas"
         component={Cinemas}
         options={{
           title: "Cinemas",
           headerStyle: {
-            backgroundColor: darkest,
+            backgroundColor: black,
           },
           headerTintColor: white,
         }}
       />
-      <Stack.Screen name="CinemaDetails" component={CinemaDetails} />
-      <Stack.Screen name="MovieDetails" component={MovieDetails} />
-      <Stack.Screen name="Upcoming" component={Upcoming} />
+      <Stack.Screen
+        name="CinemaDetails"
+        component={CinemaDetails}
+        options={{
+          title: "Cinema Details",
+          headerStyle: {
+            backgroundColor: black,
+          },
+          headerTintColor: white,
+        }}
+      />
+      <Stack.Screen
+        name="MovieDetails"
+        component={MovieDetails}
+        options={{
+          title: "Movie Details",
+          headerStyle: {
+            backgroundColor: black,
+          },
+          headerTintColor: white,
+        }}
+      />
+      <Stack.Screen
+        name="Upcoming"
+        component={Upcoming}
+        options={{
+          title: "Upcoming Movies",
+          headerStyle: {
+            backgroundColor: black,
+          },
+          headerTintColor: white,
+        }}
+      />
     </Stack.Navigator>
   </NavigationContainer>
 );
