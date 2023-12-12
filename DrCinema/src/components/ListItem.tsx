@@ -26,6 +26,6 @@ const ItemListStyles = StyleSheet.create({
     height: 100,
     marginHorizontal: 15,
     marginVertical: 6,
-    paddingVertical: 10,
+    padding: 10,
   },
 });
