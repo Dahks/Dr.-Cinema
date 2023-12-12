@@ -5,8 +5,9 @@ import {
   SafeAreaView,
   Text,
   TouchableHighlight,
+  ScrollView,
 } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Txt from "../../components/Txt";
 import { type CinemasProps } from "../../routes";
 import { black, white } from "../../styles/colors";
@@ -17,11 +18,38 @@ import {
 } from "../../redux/features/counter/counterSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import CinemaItem from "../../components/CinemaItem";
+import { toCinema } from "../../models/Cinema";
+import type { APICinema, Cinema } from "../../models/Cinema";
+import ListItem from "../../components/ListItem";
 
 const Cinemas = ({ navigation, route }: CinemasProps) => {
+  const [cinemas, setCinemas] = useState<Cinema[]>([]);
+
   const dispatch = useAppDispatch();
   const counter = useAppSelector((state) => state.counter.value);
   StatusBar.setBarStyle("light-content", true);
+
+  useEffect(() => {
+    fetch("https://api.kvikmyndir.is/theaters", {
+      method: "GET",
+      headers: {
+        "x-access-token":
+          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY1NzZkMTJmYzQwNzkzMzZiYzAyNTIzOSIsImlhdCI6MTcwMjMzODc0MSwiZXhwIjoxNzAyNDI1MTQxfQ.5ZzOJ8pJZnFNq8K5E1S5PsFlOEbQ99wiLZhIlKWwRyA",
+      },
+    })
+      .then(async (response) => {
+        if (!response.ok) throw Error("response is not ok");
+        return response.json();
+      })
+      .then((data: APICinema[]) => {
+        console.log("data: ", data);
+        setCinemas(data.map((d) => toCinema(d)));
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
   return (
     <SafeAreaView style={{ backgroundColor: black, display: "flex", flex: 1 }}>
       <View>
@@ -58,13 +86,17 @@ const Cinemas = ({ navigation, route }: CinemasProps) => {
           </View>
         </View>
       </View>
-      <CinemaItem
-        name="Cinema"
-        website="cinema.com.co.uk.is"
-        onPress={() => {
-          navigation.navigate("CinemaDetails");
-        }}
-      ></CinemaItem>
+      <ScrollView>
+        {cinemas.map((c) => (
+          <CinemaItem
+            key={c.id}
+            onPress={() => {
+              navigation.navigate("CinemaDetails");
+            }}
+            cinema={c}
+          />
+        ))}
+      </ScrollView>
       <TouchableHighlight
         onPress={() => {
           navigation.navigate("Upcoming");
