@@ -4,6 +4,19 @@ import counterReducer from "./features/counter/counterSlice";
 const store = configureStore({
   reducer: {
     counter: counterReducer,
+    /*
+    authenticationState: authenticationReducer,
+    cinemaList: cinemaListReducer,
+    selectedCinema: cinemaReducer,
+    movieList: movieListReducer,
+    selectedMovie: movieReducer,
+    upcomingList: upcomingListReducer,
+    upcoming: upcomingReducer,
+    */
+
+    /*
+    uiState: UIReducer,    
+    */
   },
 });
 
