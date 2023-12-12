@@ -1,20 +1,22 @@
 import { Button, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
+
+import { type HomeProps } from "../../routes";
 import Txt from "../../components/Txt";
+import styles from "../../styles/styles";
 import {
-  incrementByAmount,
-  resetCounter,
+  decremenetCounter,
+  incrementCounter,
 } from "../../redux/features/counter/counterSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { type UpcomingProps } from "../../routes";
 
-const Upcoming = ({ navigation, route }: UpcomingProps) => {
-  
-    const dispatch = useAppDispatch();
-    const counter = useAppSelector((state) => state.counter.value);
+const Home = ({ navigation, route }: HomeProps) => {
+  const dispatch = useAppDispatch();
+  const counter = useAppSelector((state) => state.counter.value);
+
   return (
     <View>
-      <Txt>... Upcoming movies ...</Txt>
+      <Txt>Home screen</Txt>
       <Txt>{`${counter}`}</Txt>
       <View
         style={{
@@ -29,9 +31,9 @@ const Upcoming = ({ navigation, route }: UpcomingProps) => {
         >
           <Button
             color={"#fff"}
-            title={"reset"}
+            title={"increment"}
             onPress={() => {
-              dispatch(resetCounter());
+              dispatch(incrementCounter());
             }}
           />
         </View>
@@ -40,21 +42,21 @@ const Upcoming = ({ navigation, route }: UpcomingProps) => {
         >
           <Button
             color={"#fff"}
-            title={"increment by 5"}
+            title={"decrement"}
             onPress={() => {
-              dispatch(incrementByAmount(5));
+              dispatch(decremenetCounter());
             }}
           />
         </View>
       </View>
       <Button
-        title="Back to Cinemas"
+        title="Go to Other Window"
         onPress={() => {
-          navigation.goBack();
+          navigation.navigate("OtherWindow");
         }}
       />
     </View>
   );
 };
 
-export default Upcoming;
+export default Home;
