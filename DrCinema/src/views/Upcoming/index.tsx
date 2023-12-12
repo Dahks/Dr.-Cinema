@@ -8,6 +8,7 @@ import {
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { type UpcomingProps } from "../../routes";
 import styles from "../../styles/styles";
+import UpcomingMovieItem from "../../components/UpcomingMovieItem";
 
 const Upcoming = ({ navigation, route }: UpcomingProps) => {
   StatusBar.setBarStyle("light-content", true);
@@ -48,12 +49,14 @@ const Upcoming = ({ navigation, route }: UpcomingProps) => {
           />
         </View>
       </View>
-      <Button
-        title="Back to Cinemas"
+      <UpcomingMovieItem
+        title="Hóhóhó 2"
+        releaseDate="69. janúar 1969"
+        image="https://kvikmyndir.is/images/poster/16492_500.jpg"
         onPress={() => {
-          navigation.goBack();
+          navigation.navigate("MovieDetails");
         }}
-      />
+      ></UpcomingMovieItem>
     </SafeAreaView>
   );
 };

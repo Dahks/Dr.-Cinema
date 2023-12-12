@@ -1,14 +1,17 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, TouchableHighlight, View } from "react-native";
 import React from "react";
-import Txt from "./Txt";
 import { grey, qblack, white } from "../styles/colors";
 
-const ListItem = ({ children }) => {
+interface Props {
+  children: any;
+  onPress: any;
+}
+
+const ListItem = ({ children, onPress }: Props) => {
   return (
-    <View style={ItemListStyles.container}>
-      <Txt color={white}>Lol</Txt>
-      {children}
-    </View>
+    <TouchableHighlight onPress={onPress} style={ItemListStyles.container}>
+      <View>{children}</View>
+    </TouchableHighlight>
   );
 };
 
@@ -22,6 +25,6 @@ const ItemListStyles = StyleSheet.create({
     borderRadius: 15,
     height: 100,
     margin: 15,
-    padding: 8,
+    padding: 10,
   },
 });

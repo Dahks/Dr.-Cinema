@@ -2,6 +2,7 @@ import { Button, View, StatusBar, SafeAreaView } from "react-native";
 import React from "react";
 import Txt from "../../components/Txt";
 import { type MovieDetailsProps } from "../../routes";
+import ShowtimeItem from "../../components/ShowtimeItem";
 import styles from "../../styles/styles";
 
 const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
@@ -9,12 +10,10 @@ const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
   return (
     <SafeAreaView style={styles.containerBackground}>
       <Txt> Movie Details </Txt>
-      <Button
-        title="Go to Cinema details"
-        onPress={() => {
-          navigation.goBack();
-        }}
-      />
+      <ShowtimeItem
+        time="20:00"
+        purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
+      ></ShowtimeItem>
     </SafeAreaView>
   );
 };

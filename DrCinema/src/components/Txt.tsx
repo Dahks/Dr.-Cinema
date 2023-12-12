@@ -1,6 +1,6 @@
 import React from "react";
 import { Text } from "react-native";
-import { black } from "./../styles/colors";
+import { white } from "./../styles/colors";
 
 interface Props {
   children: any;
@@ -9,6 +9,7 @@ interface Props {
   color?: string;
   bold?: boolean;
   numberOfLines?: number;
+  onPress?: any;
 }
 
 const Txt = ({
@@ -18,10 +19,14 @@ const Txt = ({
   color,
   bold = false,
   numberOfLines = 1,
+  onPress,
   ...other
 }: Props) => {
   let styleSize: number;
   switch (size) {
+    case "Huge":
+      styleSize = 30;
+      break;
     case "Large":
       styleSize = 24;
       break;
@@ -42,10 +47,11 @@ const Txt = ({
       style={{
         fontSize: styleSize,
         fontWeight: bold ? "bold" : "normal",
-        color: color ?? black,
+        color: color ?? white,
         ...style,
       }}
       {...other}
+      onPress={onPress}
     >
       {children}
     </Text>

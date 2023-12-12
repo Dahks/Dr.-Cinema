@@ -10,7 +10,7 @@ import CinemaDetails from "../views/CinemaDetails";
 import MovieDetails from "../views/MovieDetails";
 import Upcoming from "../views/Upcoming";
 
-import { black, darkest, white } from "../styles/colors";
+import { black, white } from "../styles/colors";
 
 // eslint-disable-next-line
 type RootStackParamList = {
