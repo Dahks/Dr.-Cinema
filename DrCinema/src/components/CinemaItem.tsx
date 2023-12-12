@@ -3,19 +3,19 @@ import React from "react";
 import Txt from "./Txt";
 import { qwhite } from "../styles/colors";
 import ListItem from "./ListItem";
+import type { Cinema } from "../models/Cinema";
 
 interface Props {
-  name: string;
-  website: string;
   onPress: any;
+  cinema: Cinema;
 }
 
-const CinemaItem = ({ name, website, onPress }: Props) => {
+const CinemaItem = ({ onPress, cinema }: Props) => {
   return (
     <ListItem onPress={onPress}>
-      <Txt size="Huge">{name}</Txt>
+      <Txt size="Huge">{cinema.name}</Txt>
       <Txt size="Small" color={qwhite}>
-        {website}
+        {cinema.websiteUrl}
       </Txt>
     </ListItem>
   );
