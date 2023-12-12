@@ -9,6 +9,7 @@ import {
   incrementCounter,
 } from "../../redux/features/counter/counterSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import CinemaItem from "../../components/CinemaItem";
 
 const Cinemas = ({ navigation, route }: CinemasProps) => {
   const dispatch = useAppDispatch();
@@ -55,6 +56,13 @@ const Cinemas = ({ navigation, route }: CinemasProps) => {
           }}
         />
       </View>
+      <CinemaItem
+        name="Cinema"
+        website="cinema.com.co.uk.is"
+        onPress={() => {
+          navigation.navigate("CinemaDetails");
+        }}
+      ></CinemaItem>
       <TouchableHighlight
         onPress={() => {
           navigation.navigate("Upcoming");
