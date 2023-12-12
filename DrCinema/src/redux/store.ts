@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import counterReducer from "./features/counter/counterSlice";
+import cinemaReducer from "./features/counter/cinemaSlice";
 
 const store = configureStore({
   reducer: {
     counter: counterReducer,
+    cinema: cinemaReducer,
     /*
     authenticationState: authenticationReducer,
     cinemaList: cinemaListReducer,
