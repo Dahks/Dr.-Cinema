@@ -1,5 +1,5 @@
 import { Button, StatusBar, View, SafeAreaView } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import Txt from "../../components/Txt";
 import {
   incrementByAmount,
@@ -9,14 +9,21 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { type UpcomingProps } from "../../routes";
 import styles from "../../styles/styles";
 import UpcomingMovieItem from "../../components/UpcomingMovieItem";
+import UpcomingDetails from "../../components/UpcomingDetails";
 
 const Upcoming = ({ navigation, route }: UpcomingProps) => {
   StatusBar.setBarStyle("light-content", true);
   const dispatch = useAppDispatch();
   const counter = useAppSelector((state) => state.counter.value);
+  const [overlayVisible, setOverlayVisible] = useState(false);
   return (
     <SafeAreaView style={styles.containerBackground}>
-      <Txt>... Upcoming movies ...</Txt>
+      <UpcomingDetails visible={overlayVisible}></UpcomingDetails>
+      <View style={{ alignItems: "center" }}>
+        <Txt size="Huge" bold={true}>
+          Upcoming movies
+        </Txt>
+      </View>
       <Txt>{`${counter}`}</Txt>
       <View
         style={{
@@ -54,7 +61,7 @@ const Upcoming = ({ navigation, route }: UpcomingProps) => {
         releaseDate="69. janúar 1969"
         image="https://kvikmyndir.is/images/poster/16492_500.jpg"
         onPress={() => {
-          navigation.navigate("MovieDetails");
+          setOverlayVisible(true);
         }}
       ></UpcomingMovieItem>
     </SafeAreaView>

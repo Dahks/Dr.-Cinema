@@ -96,6 +96,7 @@ const Cinemas = ({ navigation, route }: CinemasProps) => {
             cinema={c}
           />
         ))}
+        <View style={{ marginTop: 110 }}></View>
       </ScrollView>
       <TouchableHighlight
         onPress={() => {
