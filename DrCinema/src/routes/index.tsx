@@ -26,7 +26,7 @@ export type HomeProps = {
 
 type OtherWindowNavigationProp = StackNavigationProp<
   RootStackParamList,
-  "OtherWindow"
+  "OtherWindow",
 >;
 
 type OtherWindowRouteProp = RouteProp<RootStackParamList, "OtherWindow">;
