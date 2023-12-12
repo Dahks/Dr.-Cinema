@@ -47,12 +47,6 @@ const Upcoming = ({ navigation, route }: UpcomingProps) => {
           />
         </View>
       </View>
-      <Button
-        title="Back to Cinemas"
-        onPress={() => {
-          navigation.goBack();
-        }}
-      />
       <UpcomingMovieItem
         title="Hóhóhó 2"
         releaseDate="69. janúar 1969"

@@ -8,12 +8,6 @@ const CinemaDetails = ({ navigation, route }: CinemaDetailsProps) => {
   return (
     <View>
       <Txt>Cinema Details</Txt>
-      <Button
-        title="Go back to Home"
-        onPress={() => {
-          navigation.goBack();
-        }}
-      />
       <MovieItem
         title="Hóhóhó"
         year="1969"

@@ -8,12 +8,6 @@ const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
   return (
     <View>
       <Txt> Movie Details </Txt>
-      <Button
-        title="Go to Cinema details"
-        onPress={() => {
-          navigation.goBack();
-        }}
-      />
       <ShowtimeItem
         time="20:00"
         purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
