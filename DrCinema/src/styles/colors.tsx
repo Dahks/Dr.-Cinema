@@ -1,6 +1,5 @@
-export const white = "#FFFFFF";
-export const raccent = "#FF0000";
-export const gaccent = "#00D010";
-export const baccent = "#0099FF";
-export const dark = "#1D1D1D";
-export const darkest = "#000000";
+export const white = "#F2F2F2";
+export const qwhite = "#7E8084";
+export const grey = "#2B2B2B";
+export const qblack = "#1C1C1C";
+export const black = "#161616";
