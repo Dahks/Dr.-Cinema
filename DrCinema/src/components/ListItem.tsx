@@ -3,13 +3,11 @@ import React from "react";
 import Txt from "./Txt";
 import { grey, qblack, white } from "../styles/colors";
 
-
-
-const ListItem = ({children}) => {
+const ListItem = ({ children }) => {
   return (
     <View style={ItemListStyles.container}>
-        <Txt color={white}>Lol</Txt>
-        {children}
+      <Txt color={white}>Lol</Txt>
+      {children}
     </View>
   );
 };
@@ -24,6 +22,6 @@ const ItemListStyles = StyleSheet.create({
     borderRadius: 15,
     height: 100,
     margin: 15,
-    padding: 8
+    padding: 8,
   },
 });

@@ -17,7 +17,7 @@ type RootStackParamList = {
   Cinemas: undefined,
   CinemaDetails: undefined,
   MovieDetails: undefined,
-  Upcoming: undefined, 
+  Upcoming: undefined,
 };
 
 type CinemasNavigationProp = StackNavigationProp<RootStackParamList, "Cinemas">;
@@ -31,7 +31,7 @@ export type CinemasProps = {
 
 type CinemaDetailsNavigationProp = StackNavigationProp<
   RootStackParamList,
-  "CinemaDetails"
+  "CinemaDetails",
 >;
 type CinemaDetailsRouteProp = RouteProp<RootStackParamList, "CinemaDetails">;
 // eslint-disable-next-line
@@ -40,7 +40,10 @@ export type CinemaDetailsProps = {
   route: CinemaDetailsRouteProp,
 };
 
-type MovieDetailsNavigationProp = StackNavigationProp<RootStackParamList, "MovieDetails">;
+type MovieDetailsNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "MovieDetails",
+>;
 type MovieDetailsRouteProp = RouteProp<RootStackParamList, "MovieDetails">;
 
 // eslint-disable-next-line
@@ -49,7 +52,10 @@ export type MovieDetailsProps = {
   route: MovieDetailsRouteProp,
 };
 
-type UpcomingNavigationProp = StackNavigationProp<RootStackParamList, "Upcoming">;
+type UpcomingNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "Upcoming",
+>;
 type UpcomingRouteProp = RouteProp<RootStackParamList, "Upcoming">;
 
 // eslint-disable-next-line
