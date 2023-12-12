@@ -1,11 +1,18 @@
-import { Button, View, StatusBar, SafeAreaView, Image } from "react-native";
+import {
+  Button,
+  View,
+  StatusBar,
+  SafeAreaView,
+  Image,
+  ScrollView,
+} from "react-native";
 import React from "react";
 import Txt from "../../components/Txt";
 import { type MovieDetailsProps } from "../../routes";
 import ShowtimeItem from "../../components/ShowtimeItem";
 import styles from "../../styles/styles";
 import WebView from "react-native-webview";
-import { qwhite } from "../../styles/colors";
+import { black, qblack, qwhite } from "../../styles/colors";
 
 const movie = {
   _id: "634523b716aa346753e0cf63",
@@ -139,36 +146,72 @@ const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
   StatusBar.setBarStyle("light-content", true);
   return (
     <SafeAreaView style={styles.containerBackground}>
-      <View style={{ height: 200 }}>
+      <View style={{ height: 200, position: "absolute", width: "100%" }}>
         <WebView
           source={{ uri: "https://www.youtube.com/embed/EiKXJ-ObtGk?rel=0" }}
         />
       </View>
-      <View style={{ flexDirection: "row", minHeight: 200 }}>
-        <Image
-          style={{ width: 100 }}
-          source={{
-            uri: movie.poster,
-          }}
-          resizeMode="contain"
-        ></Image>
-        <View>
-          <Txt size="Huge">{movie.title}</Txt>
-          <Txt color={qwhite}>{movie.year}</Txt>
-          <Txt color={qwhite}>{movie.omdb[0].Runtime}</Txt>
+      <ScrollView stickyHeaderIndices={[1]} style={{ marginTop: 80 }}>
+        <View style={{ marginTop: 120 }}></View>
+        <View style={{ padding: 15, paddingTop: 5, backgroundColor: black }}>
+          <View style={{ flexDirection: "row" }}>
+            <Image
+              style={{ width: 100, height: 150 }}
+              source={{
+                uri: movie.poster,
+              }}
+              resizeMode="contain"
+            ></Image>
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "flex-end",
+                margin: 10,
+                marginTop: 0,
+              }}
+            >
+              <Txt size="Huge" numberOfLines={2}>
+                {movie.title}
+              </Txt>
+              <View style={{ flexDirection: "row" }}>
+                <Txt color={qwhite} style={{ marginRight: 75 }}>
+                  {movie.year}
+                </Txt>
+                <Txt color={qwhite}>{movie.omdb[0].Runtime}</Txt>
+              </View>
+            </View>
+          </View>
+          <Txt color={qwhite}>
+            {movie.genres[0].Name}, {movie.genres[1].Name}
+          </Txt>
+          <Txt size="Small" numberOfLines={10} color={qwhite}>
+            {movie.plot}
+          </Txt>
+          <View style={{ alignItems: "center", marginTop: 15 }}>
+            <Txt size="Large">Showtimes in Smárabíó</Txt>
+          </View>
         </View>
-      </View>
-      <Txt color={qwhite}>
-        {movie.genres[0].Name}, {movie.genres[1].Name}
-      </Txt>
-      <Txt size="Small" numberOfLines={10} color={qwhite}>
-        {movie.plot}
-      </Txt>
-      <Txt size="Large">Showtimes in Smárabíó</Txt>
-      <ShowtimeItem
-        time="20:00"
-        purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
-      ></ShowtimeItem>
+        <ShowtimeItem
+          time="20:00"
+          purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
+        ></ShowtimeItem>
+        <ShowtimeItem
+          time="20:00"
+          purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
+        ></ShowtimeItem>
+        <ShowtimeItem
+          time="20:00"
+          purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
+        ></ShowtimeItem>
+        <ShowtimeItem
+          time="20:00"
+          purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
+        ></ShowtimeItem>
+        <ShowtimeItem
+          time="20:00"
+          purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
+        ></ShowtimeItem>
+      </ScrollView>
     </SafeAreaView>
   );
 };
