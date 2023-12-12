@@ -7,11 +7,11 @@ import {
 } from "../../redux/features/counter/counterSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { type UpcomingProps } from "../../routes";
+import UpcomingMovieItem from "../../components/UpcomingMovieItem";
 
 const Upcoming = ({ navigation, route }: UpcomingProps) => {
-  
-    const dispatch = useAppDispatch();
-    const counter = useAppSelector((state) => state.counter.value);
+  const dispatch = useAppDispatch();
+  const counter = useAppSelector((state) => state.counter.value);
   return (
     <View>
       <Txt>... Upcoming movies ...</Txt>
@@ -53,6 +53,14 @@ const Upcoming = ({ navigation, route }: UpcomingProps) => {
           navigation.goBack();
         }}
       />
+      <UpcomingMovieItem
+        title="Hóhóhó 2"
+        releaseDate="69. janúar 1969"
+        image="https://kvikmyndir.is/images/poster/16492_500.jpg"
+        onPress={() => {
+          navigation.navigate("MovieDetails");
+        }}
+      ></UpcomingMovieItem>
     </View>
   );
 };

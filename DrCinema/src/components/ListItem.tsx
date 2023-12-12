@@ -9,8 +9,8 @@ interface Props {
 
 const ListItem = ({ children, onPress }: Props) => {
   return (
-    <TouchableHighlight onPress={onPress}>
-      <View style={ItemListStyles.container}>{children}</View>
+    <TouchableHighlight onPress={onPress} style={ItemListStyles.container}>
+      <View>{children}</View>
     </TouchableHighlight>
   );
 };

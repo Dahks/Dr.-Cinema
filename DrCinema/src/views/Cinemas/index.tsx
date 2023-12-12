@@ -49,12 +49,6 @@ const Cinemas = ({ navigation, route }: CinemasProps) => {
             />
           </View>
         </View>
-        <Button
-          title="Go to CinemaDetails"
-          onPress={() => {
-            navigation.navigate("CinemaDetails");
-          }}
-        />
       </View>
       <CinemaItem
         name="Cinema"
