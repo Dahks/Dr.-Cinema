@@ -9,6 +9,7 @@ interface Props {
   color?: string;
   bold?: boolean;
   numberOfLines?: number;
+  onPress?: any;
 }
 
 const Txt = ({
@@ -18,6 +19,7 @@ const Txt = ({
   color,
   bold = false,
   numberOfLines = 1,
+  onPress,
   ...other
 }: Props) => {
   let styleSize: number;
@@ -49,6 +51,7 @@ const Txt = ({
         ...style,
       }}
       {...other}
+      onPress={onPress}
     >
       {children}
     </Text>
