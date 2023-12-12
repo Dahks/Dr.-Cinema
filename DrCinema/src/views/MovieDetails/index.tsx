@@ -1,14 +1,14 @@
 import { Button, View } from "react-native";
 import React from "react";
 import Txt from "../../components/Txt";
-import { type OtherWindowProps } from "../../routes";
+import { type MovieDetailsProps } from "../../routes";
 
-const OtherWindow = ({ navigation, route }: OtherWindowProps) => {
+const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
   return (
     <View>
-      <Txt>Other window</Txt>
+      <Txt> Movie Details </Txt>
       <Button
-        title="Go back to Home"
+        title="Go to Cinema details"
         onPress={() => {
           navigation.goBack();
         }}
@@ -17,4 +17,4 @@ const OtherWindow = ({ navigation, route }: OtherWindowProps) => {
   );
 };
 
-export default OtherWindow;
+export default MovieDetails;
