@@ -21,12 +21,15 @@ import CinemaItem from "../../components/CinemaItem";
 import { toCinema } from "../../models/Cinema";
 import type { APICinema, Cinema } from "../../models/Cinema";
 import ListItem from "../../components/ListItem";
+import { setCinemas } from "../../redux/features/counter/cinemaSlice";
 
 const Cinemas = ({ navigation, route }: CinemasProps) => {
-  const [cinemas, setCinemas] = useState<Cinema[]>([]);
+  // const [cinemas, setCinemas] = useState<Cinema[]>([]);
 
   const dispatch = useAppDispatch();
   const counter = useAppSelector((state) => state.counter.value);
+  const cinemas = useAppSelector((state) => state.cinema.cinemas);
+
   StatusBar.setBarStyle("light-content", true);
 
   useEffect(() => {
@@ -43,7 +46,7 @@ const Cinemas = ({ navigation, route }: CinemasProps) => {
       })
       .then((data: APICinema[]) => {
         console.log("data: ", data);
-        setCinemas(data.map((d) => toCinema(d)));
+        dispatch(setCinemas(data.map((d) => toCinema(d))));
       })
       .catch((error) => {
         console.error(error);
