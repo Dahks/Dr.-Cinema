@@ -21,40 +21,36 @@ import CinemaItem from "../../components/CinemaItem";
 import { toCinema } from "../../models/Cinema";
 import type { APICinema, Cinema } from "../../models/Cinema";
 import ListItem from "../../components/ListItem";
-import { setCinemas } from "../../redux/features/counter/cinemaSlice";
+import {
+  getCinemasFromAPI,
+  setCinemas,
+} from "../../redux/features/counter/cinemaSlice";
+import { authenticate } from "../../redux/features/counter/authSlice";
+import AuthenticationStatus from "../../components/AuthenticationStatus";
 
 const Cinemas = ({ navigation, route }: CinemasProps) => {
   // const [cinemas, setCinemas] = useState<Cinema[]>([]);
 
   const dispatch = useAppDispatch();
   const counter = useAppSelector((state) => state.counter.value);
-  const cinemas = useAppSelector((state) => state.cinema.cinemas);
+  const cinema = useAppSelector((state) => state.cinema);
+  const auth = useAppSelector((state) => state.auth);
 
   StatusBar.setBarStyle("light-content", true);
 
   useEffect(() => {
-    fetch("https://api.kvikmyndir.is/theaters", {
-      method: "GET",
-      headers: {
-        "x-access-token":
-          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY1NzZkMTJmYzQwNzkzMzZiYzAyNTIzOSIsImlhdCI6MTcwMjMzODc0MSwiZXhwIjoxNzAyNDI1MTQxfQ.5ZzOJ8pJZnFNq8K5E1S5PsFlOEbQ99wiLZhIlKWwRyA",
-      },
-    })
-      .then(async (response) => {
-        if (!response.ok) throw Error("response is not ok");
-        return response.json();
-      })
-      .then((data: APICinema[]) => {
-        console.log("data: ", data);
-        dispatch(setCinemas(data.map((d) => toCinema(d))));
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    void dispatch(authenticate());
+    console.log("authentication completed");
   }, []);
+
+  useEffect(() => {
+    if (auth.isAuthenticated && auth.token)
+      void dispatch(getCinemasFromAPI(auth.token));
+  }, [auth.isAuthenticated]);
 
   return (
     <SafeAreaView style={{ backgroundColor: black, display: "flex", flex: 1 }}>
+      <AuthenticationStatus />
       <View>
         <Text style={{ color: white }}>{`${counter}`}</Text>
         <View
@@ -89,17 +85,19 @@ const Cinemas = ({ navigation, route }: CinemasProps) => {
           </View>
         </View>
       </View>
-      <ScrollView>
-        {cinemas.map((c) => (
-          <CinemaItem
-            key={c.id}
-            onPress={() => {
-              navigation.navigate("CinemaDetails");
-            }}
-            cinema={c}
-          />
-        ))}
-      </ScrollView>
+      {cinema.cinemas && (
+        <ScrollView>
+          {cinema.cinemas.map((c) => (
+            <CinemaItem
+              key={c.id}
+              onPress={() => {
+                navigation.navigate("CinemaDetails");
+              }}
+              cinema={c}
+            />
+          ))}
+        </ScrollView>
+      )}
       <TouchableHighlight
         onPress={() => {
           navigation.navigate("Upcoming");
