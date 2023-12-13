@@ -33,6 +33,7 @@ module.exports = {
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/strict-boolean-expressions": "off",
     "@typescript-eslint/return-await": ["error", "in-try-catch"],
+    '@typescript-eslint/no-invalid-void-type': 'off',
     "prettier/prettier": "error",
   },
 };

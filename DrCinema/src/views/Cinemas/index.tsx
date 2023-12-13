@@ -21,20 +21,25 @@ import CinemaItem from "../../components/CinemaItem";
 import { toCinema } from "../../models/Cinema";
 import type { APICinema, Cinema } from "../../models/Cinema";
 import ListItem from "../../components/ListItem";
-import {
-  getCinemasFromAPI,
-  setCinemas,
-} from "../../redux/features/counter/cinemaSlice";
+// import {
+//   getCinemasFromAPI,
+//   setCinemas,
+// } from "../../redux/features/counter/cinemaSlice";
 import { authenticate } from "../../redux/features/counter/authSlice";
 import AuthenticationStatus from "../../components/AuthenticationStatus";
+import { useGetCinemasQuery } from "../../services/cinemas";
 
 const Cinemas = ({ navigation, route }: CinemasProps) => {
   // const [cinemas, setCinemas] = useState<Cinema[]>([]);
 
   const dispatch = useAppDispatch();
   const counter = useAppSelector((state) => state.counter.value);
-  const cinema = useAppSelector((state) => state.cinema);
+  // const cinema = useAppSelector((state) => state.cinema);
   const auth = useAppSelector((state) => state.auth);
+
+  const cinema = useGetCinemasQuery(undefined, {
+    skip: !auth.isAuthenticated || !auth.token, // Skip if not authenticated or token is not available
+  });
 
   StatusBar.setBarStyle("light-content", true);
 
@@ -43,10 +48,10 @@ const Cinemas = ({ navigation, route }: CinemasProps) => {
     console.log("authentication completed");
   }, []);
 
-  useEffect(() => {
-    if (auth.isAuthenticated && auth.token)
-      void dispatch(getCinemasFromAPI(auth.token));
-  }, [auth.isAuthenticated]);
+  // useEffect(() => {
+  //   if (auth.isAuthenticated && auth.token)
+  //     void dispatch(getCinemasFromAPI(auth.token));
+  // }, [auth.isAuthenticated]);
 
   return (
     <SafeAreaView style={{ backgroundColor: black, display: "flex", flex: 1 }}>
@@ -85,9 +90,9 @@ const Cinemas = ({ navigation, route }: CinemasProps) => {
           </View>
         </View>
       </View>
-      {cinema.cinemas && (
+      {cinema.data && (
         <ScrollView>
-          {cinema.cinemas.map((c) => (
+          {cinema.data.map((c) => (
             <CinemaItem
               key={c.id}
               onPress={() => {
