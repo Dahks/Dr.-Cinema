@@ -1,7 +1,13 @@
-import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
-import type { AppDispatch, RootState } from "../../store";
+import {
+  type PayloadAction,
+  createSlice,
+  createAsyncThunk,
+} from "@reduxjs/toolkit";
 
-const baseUrl = "https://api.kvikmyndir.is";
+interface APIAuth {
+  success: boolean;
+  token: string;
+}
 
 interface AuthState {
   isAuthenticated: boolean;
@@ -20,62 +26,42 @@ const initialState: AuthState = {
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {
-    setAuth: (state, action: PayloadAction<AuthState>) => {
-      const { isAuthenticated, token, receivedAt, isLoading } = action.payload;
-      state.isAuthenticated = isAuthenticated;
-      state.token = token;
-      state.receivedAt = receivedAt;
-      state.isLoading = isLoading;
-    },
-    setAuthIsLoading: (state) => {
-      state.isLoading = true;
-    },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(authenticate.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(
+        authenticate.fulfilled,
+        (state, action: PayloadAction<APIAuth>) => {
+          state.isAuthenticated = action.payload.success;
+          state.token = action.payload.token;
+          state.receivedAt = Date.now();
+          state.isLoading = false;
+        }
+      )
+      .addCase(authenticate.rejected, (state, _) => {
+        state.isAuthenticated = false;
+        state.isLoading = false;
+      });
   },
 });
 
-export const authenticate = () => {
-  return async (dispatch: AppDispatch) => {
-    dispatch(setAuthIsLoading());
+export const authenticate = createAsyncThunk<APIAuth>(
+  "auth/authenticate",
+  async () => {
     const url = "https://api.kvikmyndir.is/authenticate";
-    // const data = {
-    //   username: "Gulli",
-    //   password: "8RLUCmQHpw43dP6",
-    // };
-
-    fetch(url, {
+    const response = await fetch(url, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
         Authorization: "Basic R3VsbGk6OFJMVUNtUUhwdzQzZFA2",
       },
-      //   body: JSON.stringify(data), // Convert the JavaScript object to a JSON string
-    })
-      .then(async (response) => {
-        return response.json();
-      })
-      .then((data) => {
-        if (data.success) {
-          const auth: AuthState = {
-            isAuthenticated: true,
-            receivedAt: Date.now(),
-            token: data.token,
-            isLoading: false,
-          };
-          dispatch(setAuth(auth));
-        } else {
-          console.error("ERROR: invalid authentication");
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  };
-};
+    });
 
-export const { setAuth, setAuthIsLoading } = authSlice.actions;
-
-// Other code such as selectors can use the imported `RootState` type
-export const selectAuth = (state: RootState) => state.auth.token;
+    const data: APIAuth = await response.json();
+    return data;
+  }
+);
 
 export default authSlice.reducer;
