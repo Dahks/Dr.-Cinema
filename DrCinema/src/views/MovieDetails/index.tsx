@@ -217,6 +217,26 @@ const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
           time="20:00"
           purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
         ></ShowtimeItem>
+        <ShowtimeItem
+          time="20:00"
+          purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
+        ></ShowtimeItem>
+        <ShowtimeItem
+          time="20:00"
+          purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
+        ></ShowtimeItem>
+        <ShowtimeItem
+          time="20:00"
+          purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
+        ></ShowtimeItem>
+        <ShowtimeItem
+          time="20:00"
+          purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
+        ></ShowtimeItem>
+        <ShowtimeItem
+          time="20:00"
+          purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
+        ></ShowtimeItem>
       </ScrollView>
     </SafeAreaView>
   );
