@@ -3,6 +3,7 @@ import counterReducer from "./features/counter/counterSlice";
 // import cinemaReducer from "./features/counter/cinemaSlice";
 import authReducer from "./features/counter/authSlice";
 import { cinemasApi } from "../services/cinemas";
+import { moviesApi } from "../services/movies";
 
 const store = configureStore({
   reducer: {
@@ -10,22 +11,15 @@ const store = configureStore({
     // cinema: cinemaReducer,
     auth: authReducer,
     [cinemasApi.reducerPath]: cinemasApi.reducer,
-    /*
-    authenticationState: authenticationReducer,
-    cinemaList: cinemaListReducer,
-    selectedCinema: cinemaReducer,
-    movieList: movieListReducer,
-    selectedMovie: movieReducer,
-    upcomingList: upcomingListReducer,
-    upcoming: upcomingReducer,
-    */
-
+    [moviesApi.reducerPath]: moviesApi.reducer,
     /*
     uiState: UIReducer,    
     */
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(cinemasApi.middleware),
+    getDefaultMiddleware()
+      .concat(cinemasApi.middleware)
+      .concat(moviesApi.middleware),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

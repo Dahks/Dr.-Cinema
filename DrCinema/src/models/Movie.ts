@@ -2,10 +2,10 @@ export interface Movie {
   id: number;
   title: string;
   duration: number;
-  genres: string;
+  genres: string; // maybe cleaner to have string[]
   plot: string;
   poster: string;
-  trailer: string;
+  trailer: string | null;
   showtimes: any[];
 }
 
@@ -30,6 +30,38 @@ export interface APIMovie {
   trailers: any[];
 }
 
+export interface UpcomingMovie {
+  id: number;
+  title: string;
+  // actors_abridged: any[];
+  // alternativeTitles: string;
+  // directors_abridged: any[];
+  genres: string; // maybe cleaner to have string[]
+  // ids: JSON;
+  // omdb: any[];
+  plot: string;
+  poster: string;
+  releaseDate: Date;
+  trailerUrl: string;
+  year: string;
+}
+export interface APIUpcomingMovie {
+  _id: string;
+  id: number;
+  title: string;
+  actors_abridged: any[];
+  alternativeTitles: string;
+  directors_abridged: any[];
+  genres: any[];
+  ids: JSON;
+  omdb: any[];
+  plot: string;
+  poster: string;
+  "release-dateIS": string;
+  trailers: any[];
+  year: string;
+}
+
 export const toMovie = (apiMovie: APIMovie) => {
   const movie: Movie = {
     id: apiMovie.id,
@@ -38,9 +70,30 @@ export const toMovie = (apiMovie: APIMovie) => {
     genres: apiMovie.genres.map((genre) => genre.Name).join(", "),
     plot: apiMovie.plot,
     poster: apiMovie.poster,
-    trailer: apiMovie.trailers[0].results[0].url,
+    trailer: apiMovie.trailers[0]?.results[0]?.url,
     showtimes: apiMovie.showtimes,
   };
 
   return movie;
+};
+
+export const toUpcomingMovie = (
+  apiUpcomingMovie: APIUpcomingMovie
+): UpcomingMovie => {
+  const upcomingMovie: UpcomingMovie = {
+    id: apiUpcomingMovie.id,
+    title: apiUpcomingMovie.title,
+    genres: apiUpcomingMovie.genres.map((genre) => genre.Name).join(", "),
+    releaseDate: new Date(apiUpcomingMovie["release-dateIS"]),
+    plot: apiUpcomingMovie.plot,
+    poster: apiUpcomingMovie.poster,
+    trailerUrl: apiUpcomingMovie.trailers[0]?.results[0]?.url,
+    year: apiUpcomingMovie.year,
+  };
+
+  return upcomingMovie;
+};
+
+export const sortUpcomingMovies = (a: UpcomingMovie, b: UpcomingMovie) => {
+  return a.releaseDate.getTime() - b.releaseDate.getTime();
 };
