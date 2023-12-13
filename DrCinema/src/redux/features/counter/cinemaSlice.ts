@@ -1,72 +1,59 @@
-import { type PayloadAction, createSlice, Dispatch } from "@reduxjs/toolkit";
-import type { RootState, AppDispatch } from "../../store";
+import {
+  type PayloadAction,
+  createSlice,
+  createAsyncThunk,
+} from "@reduxjs/toolkit";
 import { toCinema, type APICinema, type Cinema } from "../../../models/Cinema";
-import { useAppSelector } from "../../hooks";
 
 interface CinemaState {
   cinemas: Cinema[];
   cinemasIsLoading: boolean;
-  cinemasError: Error | undefined;
+  cinemasHasError: boolean;
 }
 
 const initialState: CinemaState = {
   cinemas: [],
   cinemasIsLoading: true,
-  cinemasError: undefined,
+  cinemasHasError: false,
 };
 
 const cinemaSlice = createSlice({
   name: "cinema",
   initialState,
-  reducers: {
-    setCinemas: (state, action: PayloadAction<Cinema[]>) => {
-      state.cinemas = action.payload;
-      state.cinemasError = undefined;
-      state.cinemasIsLoading = false;
-    },
-    addCinema: (state, action: PayloadAction<Cinema>) => {
-      state.cinemas.push(action.payload);
-      //   state.cinemasError = undefined;
-      //   state.cinemasIsLoading = false;
-    },
-    removeCinemaById: (state, action: PayloadAction<string>) => {
-      state.cinemas = state.cinemas.filter((c) => c.id !== action.payload);
-      //   state.cinemasError = undefined;
-      //   state.cinemasIsLoading = false;
-    },
-
-    getCinemasLoading: (state) => {
-      state.cinemasIsLoading = true;
-    },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(getCinemasFromAPI.pending, (state) => {
+        state.cinemasHasError = false;
+        state.cinemasIsLoading = true;
+      })
+      .addCase(
+        getCinemasFromAPI.fulfilled,
+        (state, action: PayloadAction<Cinema[]>) => {
+          state.cinemas = action.payload;
+          state.cinemasHasError = false;
+          state.cinemasIsLoading = false;
+        }
+      )
+      .addCase(getCinemasFromAPI.rejected, (state, action) => {
+        state.cinemasHasError = true;
+        state.cinemasIsLoading = false;
+      });
   },
 });
 
-export const getCinemasFromAPI = (token) => {
-  return async (dispatch: AppDispatch) => {
-    dispatch(getCinemasLoading());
-    fetch("https://api.kvikmyndir.is/theaters", {
+export const getCinemasFromAPI = createAsyncThunk<Cinema[], string>(
+  "cinemas/getCinemasFromAPI",
+  async (token: string) => {
+    const response = await fetch("https://api.kvikmyndir.is/theaters", {
       method: "GET",
       headers: {
         "x-access-token": `${token}`,
       },
-    })
-      .then(async (response) => {
-        if (!response.ok) throw Error("response is not ok");
-        return response.json();
-      })
-      .then((data: APICinema[]) => {
-        dispatch(setCinemas(data.map((d) => toCinema(d))));
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-};
-
-export const { setCinemas, addCinema, removeCinemaById, getCinemasLoading } =
-  cinemaSlice.actions;
-
-// Other code such as selectors can use the imported `RootState` type
-export const selectCinemas = (state: RootState) => state.cinema.cinemas;
+    });
+    const data: APICinema[] = await response.json();
+    return data.map(toCinema);
+  }
+);
 
 export default cinemaSlice.reducer;
