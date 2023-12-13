@@ -3,33 +3,39 @@ import React from "react";
 import Txt from "./Txt";
 import { qwhite } from "../styles/colors";
 import ListItem from "./ListItem";
+import { type UpcomingMovie } from "../models/Movie";
+import styles from "../styles/styles";
+import MarqueeText from "./MarqueeText";
 
 interface Props {
-  title: string;
-  releaseDate: string;
-  image: string;
+  upcomingMovie: UpcomingMovie;
   onPress: any;
 }
 
-const UpcomingMovieItem = ({ title, releaseDate, image, onPress }: Props) => {
+const UpcomingMovieItem = ({ upcomingMovie, onPress }: Props) => {
   return (
     <ListItem onPress={onPress}>
       <View
         style={{
           flexDirection: "row",
+          // ...styles.border,
         }}
       >
         <Image
-          style={{ height: 80, width: 60 }}
+          style={{
+            height: 80,
+            width: 60,
+            borderRadius: 4,
+          }}
           source={{
-            uri: image,
+            uri: upcomingMovie.poster,
           }}
           resizeMode="contain"
         ></Image>
         <View>
-          <Txt size="Large">{title}</Txt>
+          <Txt size="Large">{upcomingMovie.title}</Txt>
           <Txt size="Small" color={qwhite}>
-            {releaseDate}
+            {`Release: ${upcomingMovie.releaseDate.toDateString()}`}
           </Txt>
         </View>
       </View>
