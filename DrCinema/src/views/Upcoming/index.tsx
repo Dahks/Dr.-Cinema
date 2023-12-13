@@ -18,7 +18,12 @@ const Upcoming = ({ navigation, route }: UpcomingProps) => {
   const [overlayVisible, setOverlayVisible] = useState(false);
   return (
     <SafeAreaView style={styles.containerBackground}>
-      <UpcomingDetails visible={overlayVisible}></UpcomingDetails>
+      <UpcomingDetails
+        visible={overlayVisible}
+        overlayVisibility={() => {
+          setOverlayVisible(false);
+        }}
+      ></UpcomingDetails>
       <View style={{ alignItems: "center" }}>
         <Txt size="Huge" bold={true}>
           Upcoming movies

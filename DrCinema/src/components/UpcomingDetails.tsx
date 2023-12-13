@@ -1,15 +1,16 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Modal } from "react-native";
-import { black, qwhite } from "../styles/colors";
-import PopUpModal from "./PopUpModal";
+import { View, StyleSheet, Modal, TouchableHighlight } from "react-native";
+import { black, qwhite, white } from "../styles/colors";
 import Txt from "./Txt";
 import WebView from "react-native-webview";
+import PopUpModal from "./PopUpModal";
 
 interface Props {
   visible: boolean;
+  overlayVisibility: any;
 }
 
-const UpcomingDetails = ({ visible }: Props) => {
+const UpcomingDetails = ({ visible, overlayVisibility }: Props) => {
   return (
     <View>
       <PopUpModal visible={visible}>
@@ -25,6 +26,22 @@ const UpcomingDetails = ({ visible }: Props) => {
               }}
             />
           </View>
+          <TouchableHighlight
+            onPress={overlayVisibility}
+            style={{
+              backgroundColor: "#2B2B2B",
+              alignItems: "center",
+              padding: 10,
+              borderRadius: 30,
+              marginTop: 10,
+              width: "40%",
+              alignSelf: "center",
+              borderWidth: 1,
+              borderColor: "#7E8084",
+            }}
+          >
+            <Txt>Close</Txt>
+          </TouchableHighlight>
         </View>
       </PopUpModal>
     </View>
