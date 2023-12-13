@@ -31,33 +31,34 @@ const Cinemas = ({ navigation, route }: CinemasProps) => {
   const counter = useAppSelector((state) => state.counter.value);
 
   const { data, isLoading, error } = useGetCinemasQuery();
+  console.log(data);
 
   StatusBar.setBarStyle("light-content", true);
 
-  useEffect(() => {
-    fetch("https://api.kvikmyndir.is/theaters", {
-      method: "GET",
-      headers: {
-        "x-access-token":
-          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY1NzZkMTJmYzQwNzkzMzZiYzAyNTIzOSIsImlhdCI6MTcwMjMzODc0MSwiZXhwIjoxNzAyNDI1MTQxfQ.5ZzOJ8pJZnFNq8K5E1S5PsFlOEbQ99wiLZhIlKWwRyA",
-      },
-    })
-      .then(async (response) => {
-        if (!response.ok) throw Error("response is not ok");
-        return response.json();
-      })
-      .then((data: APICinema[]) => {
-        console.log("data: ", data);
-        setCinemas(data.map((d) => toCinema(d)));
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch("https://api.kvikmyndir.is/theaters", {
+  //     method: "GET",
+  //     headers: {
+  //       "x-access-token":
+  //         "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY1NzZkMTJmYzQwNzkzMzZiYzAyNTIzOSIsImlhdCI6MTcwMjMzODc0MSwiZXhwIjoxNzAyNDI1MTQxfQ.5ZzOJ8pJZnFNq8K5E1S5PsFlOEbQ99wiLZhIlKWwRyA",
+  //     },
+  //   })
+  //     .then(async (response) => {
+  //       if (!response.ok) throw Error("response is not ok");
+  //       return response.json();
+  //     })
+  //     .then((data: APICinema[]) => {
+  //       console.log("data: ", data);
+  //       setCinemas(data.map((d) => toCinema(d)));
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }, []);
 
   return (
     <SafeAreaView style={{ backgroundColor: black, display: "flex", flex: 1 }}>
-      <View>
+      {/* <View>
         <Text style={{ color: white }}>{`${counter}`}</Text>
         <View
           style={{
@@ -90,7 +91,7 @@ const Cinemas = ({ navigation, route }: CinemasProps) => {
             />
           </View>
         </View>
-      </View>
+      </View> */}
       {/* <ScrollView>
         {cinemas.map((c) => (
           <CinemaItem
