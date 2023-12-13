@@ -151,12 +151,17 @@ const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
           source={{ uri: "https://www.youtube.com/embed/EiKXJ-ObtGk?rel=0" }}
         />
       </View>
-      <ScrollView stickyHeaderIndices={[1]} style={{ marginTop: 80 }}>
-        <View style={{ marginTop: 120 }}></View>
+      <ScrollView stickyHeaderIndices={[1, 3]} style={{ paddingTop: 110 }}>
+        <View style={{ marginTop: 140 }}></View>
         <View style={{ padding: 15, paddingTop: 5, backgroundColor: black }}>
           <View style={{ flexDirection: "row" }}>
             <Image
-              style={{ width: 100, height: 150 }}
+              style={{
+                width: 100,
+                height: 150,
+                position: "absolute",
+                top: -50,
+              }}
               source={{
                 uri: movie.poster,
               }}
@@ -168,6 +173,7 @@ const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
                 justifyContent: "flex-end",
                 margin: 10,
                 marginTop: 0,
+                marginLeft: 110,
               }}
             >
               <Txt size="Huge" numberOfLines={2}>
@@ -184,12 +190,12 @@ const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
           <Txt color={qwhite}>
             {movie.genres[0].Name}, {movie.genres[1].Name}
           </Txt>
-          <Txt size="Small" numberOfLines={10} color={qwhite}>
-            {movie.plot}
-          </Txt>
-          <View style={{ alignItems: "center", marginTop: 15 }}>
-            <Txt size="Large">Showtimes in Smárabíó</Txt>
-          </View>
+        </View>
+        <Txt size="Small" numberOfLines={10} color={qwhite}>
+          {movie.plot}
+        </Txt>
+        <View style={{ alignItems: "center", marginTop: 15 }}>
+          <Txt size="Large">Showtimes in Smárabíó</Txt>
         </View>
         <ShowtimeItem
           time="20:00"
