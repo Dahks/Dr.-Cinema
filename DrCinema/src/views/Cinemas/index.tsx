@@ -6,6 +6,7 @@ import {
   Text,
   TouchableHighlight,
   ScrollView,
+  FlatList,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import Txt from "../../components/Txt";
@@ -21,12 +22,16 @@ import CinemaItem from "../../components/CinemaItem";
 import { toCinema } from "../../models/Cinema";
 import type { APICinema, Cinema } from "../../models/Cinema";
 import ListItem from "../../components/ListItem";
+import { useGetCinemasQuery } from "../../services/cinemasApi";
 
 const Cinemas = ({ navigation, route }: CinemasProps) => {
   const [cinemas, setCinemas] = useState<Cinema[]>([]);
 
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const counter = useAppSelector((state) => state.counter.value);
+
+  const { data, isLoading, error } = useGetCinemasQuery();
+
   StatusBar.setBarStyle("light-content", true);
 
   useEffect(() => {
@@ -86,7 +91,7 @@ const Cinemas = ({ navigation, route }: CinemasProps) => {
           </View>
         </View>
       </View>
-      <ScrollView>
+      {/* <ScrollView>
         {cinemas.map((c) => (
           <CinemaItem
             key={c.id}
@@ -95,8 +100,19 @@ const Cinemas = ({ navigation, route }: CinemasProps) => {
             }}
             cinema={c}
           />
-        ))}
-      </ScrollView>
+        ))} */}
+      <FlatList
+        data={data}
+        keyExtractor={(cinema) => cinema.name}
+        renderItem={({ item }) => (
+          <CinemaItem
+            onPress={() => {
+              navigation.navigate("CinemaDetails");
+            }}
+            cinema={item}
+          />
+        )}
+      ></FlatList>
       <TouchableHighlight
         onPress={() => {
           navigation.navigate("Upcoming");
