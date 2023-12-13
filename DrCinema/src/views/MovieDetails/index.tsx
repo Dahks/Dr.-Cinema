@@ -151,16 +151,17 @@ const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
           source={{ uri: "https://www.youtube.com/embed/EiKXJ-ObtGk?rel=0" }}
         />
       </View>
-      <ScrollView stickyHeaderIndices={[1, 3]} style={{ paddingTop: 110 }}>
+      <ScrollView stickyHeaderIndices={[1]} style={{ marginTop: 60 }}>
         <View style={{ marginTop: 140 }}></View>
-        <View style={{ padding: 15, paddingTop: 5, backgroundColor: black }}>
+        <View>
           <View style={{ flexDirection: "row" }}>
             <Image
               style={{
                 width: 100,
                 height: 150,
                 position: "absolute",
-                top: -50,
+                top: 0,
+                zIndex: 1,
               }}
               source={{
                 uri: movie.poster,
@@ -171,9 +172,11 @@ const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
               style={{
                 flex: 1,
                 justifyContent: "flex-end",
-                margin: 10,
-                marginTop: 0,
-                marginLeft: 110,
+                marginTop: 50,
+                paddingLeft: 120,
+                padding: 15,
+                paddingTop: 5,
+                backgroundColor: black,
               }}
             >
               <Txt size="Huge" numberOfLines={2}>
@@ -187,56 +190,58 @@ const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
               </View>
             </View>
           </View>
-          <Txt color={qwhite}>
-            {movie.genres[0].Name}, {movie.genres[1].Name}
-          </Txt>
         </View>
+        <Txt color={qwhite}>
+          {movie.genres[0].Name}, {movie.genres[1].Name}
+        </Txt>
         <Txt size="Small" numberOfLines={10} color={qwhite}>
           {movie.plot}
         </Txt>
         <View style={{ alignItems: "center", marginTop: 15 }}>
           <Txt size="Large">Showtimes in Smárabíó</Txt>
         </View>
-        <ShowtimeItem
-          time="20:00"
-          purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
-        ></ShowtimeItem>
-        <ShowtimeItem
-          time="20:00"
-          purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
-        ></ShowtimeItem>
-        <ShowtimeItem
-          time="20:00"
-          purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
-        ></ShowtimeItem>
-        <ShowtimeItem
-          time="20:00"
-          purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
-        ></ShowtimeItem>
-        <ShowtimeItem
-          time="20:00"
-          purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
-        ></ShowtimeItem>
-        <ShowtimeItem
-          time="20:00"
-          purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
-        ></ShowtimeItem>
-        <ShowtimeItem
-          time="20:00"
-          purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
-        ></ShowtimeItem>
-        <ShowtimeItem
-          time="20:00"
-          purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
-        ></ShowtimeItem>
-        <ShowtimeItem
-          time="20:00"
-          purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
-        ></ShowtimeItem>
-        <ShowtimeItem
-          time="20:00"
-          purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
-        ></ShowtimeItem>
+        <View style={{ maxHeight: 500 }}>
+          <ShowtimeItem
+            time="20:00"
+            purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
+          ></ShowtimeItem>
+          <ShowtimeItem
+            time="20:00"
+            purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
+          ></ShowtimeItem>
+          <ShowtimeItem
+            time="20:00"
+            purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
+          ></ShowtimeItem>
+          <ShowtimeItem
+            time="20:00"
+            purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
+          ></ShowtimeItem>
+          <ShowtimeItem
+            time="20:00"
+            purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
+          ></ShowtimeItem>
+          <ShowtimeItem
+            time="20:00"
+            purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
+          ></ShowtimeItem>
+          <ShowtimeItem
+            time="20:00"
+            purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
+          ></ShowtimeItem>
+          <ShowtimeItem
+            time="20:00"
+            purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
+          ></ShowtimeItem>
+          <ShowtimeItem
+            time="20:00"
+            purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
+          ></ShowtimeItem>
+          <ShowtimeItem
+            time="20:00"
+            purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
+          ></ShowtimeItem>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );

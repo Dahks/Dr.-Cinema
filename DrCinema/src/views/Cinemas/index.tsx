@@ -34,7 +34,7 @@ const Cinemas = ({ navigation, route }: CinemasProps) => {
       method: "GET",
       headers: {
         "x-access-token":
-          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY1NzZkMTJmYzQwNzkzMzZiYzAyNTIzOSIsImlhdCI6MTcwMjMzODc0MSwiZXhwIjoxNzAyNDI1MTQxfQ.5ZzOJ8pJZnFNq8K5E1S5PsFlOEbQ99wiLZhIlKWwRyA",
+          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY1NzZkMTJmYzQwNzkzMzZiYzAyNTIzOSIsImlhdCI6MTcwMjQ3MTk1MSwiZXhwIjoxNzAyNTU4MzUxfQ.YQAa1NCQf61KRNM_LoWbhS6iXAPdmE_WpZO9GwYxVGw",
       },
     })
       .then(async (response) => {
