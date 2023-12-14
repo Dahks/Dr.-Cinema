@@ -5,6 +5,8 @@ import { type CinemaDetailsProps } from "../../routes";
 import MovieItem from "../../components/MovieItem";
 import styles from "../../styles/styles";
 import { qwhite } from "../../styles/colors";
+import { useGetMoviesQuery } from "../../services/movies";
+import { useAppSelector } from "../../redux/hooks";
 
 // TODO REDUX
 const cinema = {
@@ -22,7 +24,15 @@ const cinema = {
 const CinemaDetails = ({ navigation, route }: CinemaDetailsProps) => {
   const cinema = route.params.cinema;
 
+  const auth = useAppSelector((state) => state.auth);
+  const movies = useGetMoviesQuery(undefined, {
+    skip: !auth.isAuthenticated || !auth.token,
+  });
+
   StatusBar.setBarStyle("light-content", true);
+
+  const screenings = movies.data?.filter((movie) => movie.showtimes);
+
   return (
     <SafeAreaView style={styles.containerBackground}>
       <View style={{ alignItems: "center" }}>

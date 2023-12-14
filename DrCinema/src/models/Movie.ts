@@ -6,7 +6,7 @@ export interface Movie {
   plot: string;
   poster: string;
   trailer: string | null;
-  showtimes: any[];
+  showtimes: Showtime[];
 }
 
 export interface APIMovie {
@@ -26,7 +26,7 @@ export interface APIMovie {
   plot: string;
   poster: string;
   ratings: JSON;
-  showtimes: any[];
+  showtimes: APIShowtime[];
   trailers: any[];
 }
 
@@ -62,6 +62,36 @@ export interface APIUpcomingMovie {
   year: string;
 }
 
+export interface Showtime {
+  cinemaId: number;
+  schedules: Schedule[];
+}
+
+export interface Schedule {
+  time: string;
+  purchaseUrl: string;
+}
+
+interface APIShowtime {
+  cinema: { id: number, name: string };
+  cinema_name: string;
+  schedule: Array<{ time: string, purchase_url: string, info: string }>;
+}
+
+const toShowtime = (apiShowtimes: APIShowtime[]): Showtime[] => {
+  const showtimes: Showtime[] = apiShowtimes.map((apiShowtime) => {
+    const showtime: Showtime = {
+      cinemaId: apiShowtime.cinema.id,
+      schedules: apiShowtime.schedule.map((sch): Schedule => {
+        return { time: sch.time, purchaseUrl: sch.purchase_url };
+      }),
+    };
+
+    return showtime;
+  });
+  return showtimes;
+};
+
 export const toMovie = (apiMovie: APIMovie) => {
   const movie: Movie = {
     id: apiMovie.id,
@@ -71,7 +101,7 @@ export const toMovie = (apiMovie: APIMovie) => {
     plot: apiMovie.plot,
     poster: apiMovie.poster,
     trailer: apiMovie.trailers[0]?.results[0]?.url,
-    showtimes: apiMovie.showtimes,
+    showtimes: toShowtime(apiMovie.showtimes),
   };
 
   return movie;
