@@ -56,42 +56,8 @@ const Cinemas = ({ navigation, route }: CinemasProps) => {
   return (
     <SafeAreaView style={{ backgroundColor: black, display: "flex", flex: 1 }}>
       <AuthenticationStatus />
-      <View>
-        <Text style={{ color: white }}>{`${counter}`}</Text>
-        <View
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            flexDirection: "row",
-            gap: 8,
-          }}
-        >
-          <View
-            style={{ width: 120, backgroundColor: "#222232", borderRadius: 12 }}
-          >
-            <Button
-              color={"#fff"}
-              title={"increment"}
-              onPress={() => {
-                dispatch(incrementCounter());
-              }}
-            />
-          </View>
-          <View
-            style={{ width: 120, backgroundColor: "#222232", borderRadius: 12 }}
-          >
-            <Button
-              color={"#fff"}
-              title={"decrement"}
-              onPress={() => {
-                dispatch(decremenetCounter());
-              }}
-            />
-          </View>
-        </View>
-      </View>
       {cinema.data && (
-        <ScrollView>
+        <ScrollView contentContainerStyle={{ paddingBottom: 110 }}>
           {cinema.data.map((c) => (
             <CinemaItem
               key={c.id}
@@ -120,7 +86,7 @@ const Cinemas = ({ navigation, route }: CinemasProps) => {
           borderColor: "#7E8084",
         }}
       >
-        <Text style={{ color: white }}>Upcoming Movies</Text>
+        <Text style={{ color: white }}>Væntanlegar kvikmyndir</Text>
       </TouchableHighlight>
     </SafeAreaView>
   );

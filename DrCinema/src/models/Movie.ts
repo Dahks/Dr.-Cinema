@@ -7,6 +7,7 @@ export interface Movie {
   poster: string;
   trailer: string | null;
   showtimes: Showtime[];
+  year: string;
 }
 
 export interface APIMovie {
@@ -28,6 +29,7 @@ export interface APIMovie {
   ratings: JSON;
   showtimes: APIShowtime[];
   trailers: any[];
+  year: string;
 }
 
 export interface UpcomingMovie {
@@ -102,6 +104,7 @@ export const toMovie = (apiMovie: APIMovie) => {
     poster: apiMovie.poster,
     trailer: apiMovie.trailers[0]?.results[0]?.url,
     showtimes: toShowtime(apiMovie.showtimes),
+    year: apiMovie.year,
   };
 
   return movie;

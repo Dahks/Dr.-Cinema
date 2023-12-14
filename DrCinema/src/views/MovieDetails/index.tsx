@@ -61,10 +61,9 @@ const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
               </Txt>
               <View style={{ flexDirection: "row" }}>
                 <Txt color={qwhite} style={{ marginRight: 75 }}>
-                  {"TODO year not in Movie type"}
+                  {movie.year}
                 </Txt>
-                {/* <Txt color={qwhite}>{movie.omdb[0].Runtime}</Txt> */}
-                <Txt color={qwhite}>{movie.duration}</Txt>
+                <Txt color={qwhite}>{movie.duration} mínútur</Txt>
               </View>
             </View>
           </View>
@@ -73,7 +72,7 @@ const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
             {movie.plot}
           </Txt>
           <View style={{ alignItems: "center", marginTop: 15 }}>
-            <Txt size="Large">Showtimes in Smárabíó</Txt>
+            <Txt size="Large">Sýningartímar</Txt>
           </View>
         </View>
         <ShowtimeItem

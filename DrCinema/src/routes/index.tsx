@@ -100,10 +100,12 @@ const Routes = (): JSX.Element => (
         name="Cinemas"
         component={Cinemas}
         options={{
-          title: "Cinemas",
+          title: "Kvikmyndahús",
           headerStyle: {
             backgroundColor: black,
           },
+          headerTitleStyle: { fontSize: 32 },
+          headerTitleAlign: "center",
           headerTintColor: white,
         }}
       />
@@ -111,10 +113,12 @@ const Routes = (): JSX.Element => (
         name="CinemaDetails"
         component={CinemaDetails}
         options={{
-          title: "Cinema Details",
+          title: "TODO NAFN BIÓ",
           headerStyle: {
             backgroundColor: black,
           },
+          headerTitleStyle: { fontSize: 32 },
+          headerTitleAlign: "center",
           headerTintColor: white,
         }}
       />
@@ -122,10 +126,12 @@ const Routes = (): JSX.Element => (
         name="MovieDetails"
         component={MovieDetails}
         options={{
-          title: "Movie Details",
+          title: "TODO NAFN A MYND",
           headerStyle: {
             backgroundColor: black,
           },
+          headerTitleStyle: { fontSize: 32 },
+          headerTitleAlign: "center",
           headerTintColor: white,
         }}
       />
@@ -133,10 +139,12 @@ const Routes = (): JSX.Element => (
         name="UpcomingMovieDetails"
         component={UpcomingMovieDetails}
         options={{
-          title: "Upcoming Movie Details",
+          title: "TODO NAFN A MYND",
           headerStyle: {
             backgroundColor: black,
           },
+          headerTitleStyle: { fontSize: 32 },
+          headerTitleAlign: "center",
           headerTintColor: white,
         }}
       />
@@ -144,10 +152,12 @@ const Routes = (): JSX.Element => (
         name="Upcoming"
         component={Upcoming}
         options={{
-          title: "Upcoming Movies",
+          title: "Væntanlegar",
           headerStyle: {
             backgroundColor: black,
           },
+          headerTitleStyle: { fontSize: 32 },
+          headerTitleAlign: "center",
           headerTintColor: white,
         }}
       />

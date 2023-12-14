@@ -66,10 +66,6 @@ const UpcomingMovieDetails = ({
                 <Txt color={qwhite} style={{ marginRight: 75 }}>
                   {movie.year}
                 </Txt>
-                {/* <Txt color={qwhite}>{movie.omdb[0].Runtime}</Txt> */}
-                <Txt color={qwhite}>
-                  TODO Duration missing for upcoming movies
-                </Txt>
               </View>
             </View>
           </View>

@@ -33,9 +33,6 @@ const CinemaDetails = ({ navigation, route }: CinemaDetailsProps) => {
   return (
     <SafeAreaView style={styles.containerBackground}>
       <View style={{ alignItems: "center" }}>
-        <Txt size="Huge" bold={true}>
-          {cinema.name}
-        </Txt>
         <Txt
           color={qwhite}
           onPress={() => {
