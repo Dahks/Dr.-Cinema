@@ -3,8 +3,8 @@ import { black, qblack, white } from "./colors";
 
 export default StyleSheet.create({
   border: {
-    borderWidth: 1,
-    borderColor: qblack,
+    borderWidth: 2,
+    borderColor: "#fff",
     borderStyle: "solid",
   },
   containerBackground: {

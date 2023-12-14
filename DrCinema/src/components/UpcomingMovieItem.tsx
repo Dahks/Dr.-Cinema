@@ -1,12 +1,11 @@
-import { StyleSheet, View, Image } from "react-native";
+import { View, Image } from "react-native";
 import React from "react";
 import Txt from "./Txt";
 import { qwhite } from "../styles/colors";
 import ListItem from "./ListItem";
 import { type UpcomingMovie } from "../models/Movie";
-import styles from "../styles/styles";
-import MarqueeText from "./MarqueeText";
-
+// import MarqueeText from "react-native-marquee";
+// import AutoScroll from "@homielab/react-native-auto-scroll";
 interface Props {
   upcomingMovie: UpcomingMovie;
   onPress: any;
@@ -18,7 +17,6 @@ const UpcomingMovieItem = ({ upcomingMovie, onPress }: Props) => {
       <View
         style={{
           flexDirection: "row",
-          // ...styles.border,
         }}
       >
         <Image
@@ -32,10 +30,27 @@ const UpcomingMovieItem = ({ upcomingMovie, onPress }: Props) => {
           }}
           resizeMode="contain"
         ></Image>
-        <View>
-          <Txt size="Large">{upcomingMovie.title}</Txt>
+        <View style={{ flexShrink: 1 }}>
+          {/* <Txt size="Large">{upcomingMovie.title}</Txt> */}
+          {/* <MarqueeText // from react-native-marquee
+            style={{ fontSize: 30, color: "#fff" }}
+            speed={0.5}
+            marqueeOnStart={true}
+            loop={true}
+            consecutive={true}
+            delay={0}
+          >
+            {upcomingMovie.title}
+          </MarqueeText> */}
+          {upcomingMovie.title.length > 25 ? (
+            // <AutoScroll> // from react-native-auto-scroll
+            <Txt>{upcomingMovie.title}</Txt>
+          ) : (
+            // </AutoScroll>
+            <Txt size="Large">{upcomingMovie.title}</Txt>
+          )}
           <Txt size="Small" color={qwhite}>
-            {`Release: ${upcomingMovie.releaseDate.toDateString()}`}
+            {`Release: ${new Date(upcomingMovie.releaseDate).toDateString()}`}
           </Txt>
         </View>
       </View>

@@ -41,7 +41,7 @@ export interface UpcomingMovie {
   // omdb: any[];
   plot: string;
   poster: string;
-  releaseDate: Date;
+  releaseDate: string;
   trailerUrl: string;
   year: string;
 }
@@ -84,7 +84,7 @@ export const toUpcomingMovie = (
     id: apiUpcomingMovie.id,
     title: apiUpcomingMovie.title,
     genres: apiUpcomingMovie.genres.map((genre) => genre.Name).join(", "),
-    releaseDate: new Date(apiUpcomingMovie["release-dateIS"]),
+    releaseDate: apiUpcomingMovie["release-dateIS"],
     plot: apiUpcomingMovie.plot,
     poster: apiUpcomingMovie.poster,
     trailerUrl: apiUpcomingMovie.trailers[0]?.results[0]?.url,
@@ -95,5 +95,5 @@ export const toUpcomingMovie = (
 };
 
 export const sortUpcomingMovies = (a: UpcomingMovie, b: UpcomingMovie) => {
-  return a.releaseDate.getTime() - b.releaseDate.getTime();
+  return new Date(a.releaseDate).getTime() - new Date(b.releaseDate).getTime();
 };
