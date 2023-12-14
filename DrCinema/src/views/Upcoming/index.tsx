@@ -13,6 +13,7 @@ import styles from "../../styles/styles";
 import UpcomingMovieItem from "../../components/UpcomingMovieItem";
 import { useGetUpcomingMoviesQuery } from "../../services/movies";
 import { sortUpcomingMovies, type UpcomingMovie } from "../../models/Movie";
+import { setSelectedMovie } from "../../redux/features/counter/selectionSlice";
 
 const Upcoming = ({ navigation, route }: UpcomingProps) => {
   StatusBar.setBarStyle("light-content", true);
@@ -29,9 +30,8 @@ const Upcoming = ({ navigation, route }: UpcomingProps) => {
         key={movie.id}
         upcomingMovie={movie}
         onPress={() => {
-          navigation?.navigate("UpcomingMovieDetails", {
-            upcomingMovie: movie,
-          });
+          dispatch(setSelectedMovie(movie));
+          navigation?.navigate("UpcomingMovieDetails");
         }}
       />
     ));

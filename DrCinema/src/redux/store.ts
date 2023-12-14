@@ -4,10 +4,12 @@ import counterReducer from "./features/counter/counterSlice";
 import authReducer from "./features/counter/authSlice";
 import { cinemasApi } from "../services/cinemas";
 import { moviesApi } from "../services/movies";
+import selectionSlice from "./features/counter/selectionSlice";
 
 const store = configureStore({
   reducer: {
     counter: counterReducer,
+    selection: selectionSlice,
     // cinema: cinemaReducer,
     auth: authReducer,
     [cinemasApi.reducerPath]: cinemasApi.reducer,
