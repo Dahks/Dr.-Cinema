@@ -64,6 +64,7 @@ export const authenticate = createAsyncThunk<APIAuth>(
     });
 
     const data: APIAuth = await response.json();
+    // DO NOT REMOVE THIS COMMENT, it breaks our authentication
     return data;
   }
 );
