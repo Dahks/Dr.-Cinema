@@ -88,17 +88,10 @@ const Stack = createStackNavigator();
 
 const Routes = (): JSX.Element => {
   const cinema: Cinema = useAppSelector((state) => state.selection.cinema);
+
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Cinemas"
-        screenOptions={
-          {
-            // headerTransparent: true,
-            // headerShadowVisible: true,
-          }
-        }
-      >
+      <Stack.Navigator initialRouteName="Cinemas">
         <Stack.Screen
           name="Cinemas"
           component={Cinemas}

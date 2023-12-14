@@ -54,7 +54,6 @@ const authSlice = createSlice({
 export const authenticate = createAsyncThunk<APIAuth>(
   "auth/authenticate",
   async () => {
-    console.log("Basic " + btoa(USERNAME + ":" + PASSWORD));
     const url = "https://api.kvikmyndir.is/authenticate";
     const response = await fetch(url, {
       method: "POST",
@@ -64,7 +63,6 @@ export const authenticate = createAsyncThunk<APIAuth>(
     });
 
     const data: APIAuth = await response.json();
-    // DO NOT REMOVE THIS COMMENT, it breaks our authentication
     return data;
   }
 );
