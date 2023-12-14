@@ -1,5 +1,5 @@
 export interface Cinema {
-  id: string;
+  id: number;
   name: string;
   description: string;
   address: string; // could be converted to Address type
@@ -15,7 +15,7 @@ export interface APICinema {
   phone: string;
   description: string;
   website: string;
-  id: string;
+  id: number;
   google_map: string;
 }
 
