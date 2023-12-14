@@ -21,37 +21,41 @@ import CinemaItem from "../../components/CinemaItem";
 import { toCinema } from "../../models/Cinema";
 import type { APICinema, Cinema } from "../../models/Cinema";
 import ListItem from "../../components/ListItem";
+// import {
+//   getCinemasFromAPI,
+//   setCinemas,
+// } from "../../redux/features/counter/cinemaSlice";
+import { authenticate } from "../../redux/features/counter/authSlice";
+import AuthenticationStatus from "../../components/AuthenticationStatus";
+import { useGetCinemasQuery } from "../../services/cinemas";
 
 const Cinemas = ({ navigation, route }: CinemasProps) => {
-  const [cinemas, setCinemas] = useState<Cinema[]>([]);
+  // const [cinemas, setCinemas] = useState<Cinema[]>([]);
 
   const dispatch = useAppDispatch();
   const counter = useAppSelector((state) => state.counter.value);
+  // const cinema = useAppSelector((state) => state.cinema);
+  const auth = useAppSelector((state) => state.auth);
+
+  const cinema = useGetCinemasQuery(undefined, {
+    skip: !auth.isAuthenticated || !auth.token, // Skip if not authenticated or token is not available
+  });
+
   StatusBar.setBarStyle("light-content", true);
 
   useEffect(() => {
-    fetch("https://api.kvikmyndir.is/theaters", {
-      method: "GET",
-      headers: {
-        "x-access-token":
-          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY1NzZkMTJmYzQwNzkzMzZiYzAyNTIzOSIsImlhdCI6MTcwMjMzODc0MSwiZXhwIjoxNzAyNDI1MTQxfQ.5ZzOJ8pJZnFNq8K5E1S5PsFlOEbQ99wiLZhIlKWwRyA",
-      },
-    })
-      .then(async (response) => {
-        if (!response.ok) throw Error("response is not ok");
-        return response.json();
-      })
-      .then((data: APICinema[]) => {
-        console.log("data: ", data);
-        setCinemas(data.map((d) => toCinema(d)));
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    void dispatch(authenticate());
+    console.log("authentication completed");
   }, []);
+
+  // useEffect(() => {
+  //   if (auth.isAuthenticated && auth.token)
+  //     void dispatch(getCinemasFromAPI(auth.token));
+  // }, [auth.isAuthenticated]);
 
   return (
     <SafeAreaView style={{ backgroundColor: black, display: "flex", flex: 1 }}>
+      <AuthenticationStatus />
       <View>
         <Text style={{ color: white }}>{`${counter}`}</Text>
         <View
@@ -86,17 +90,19 @@ const Cinemas = ({ navigation, route }: CinemasProps) => {
           </View>
         </View>
       </View>
-      <ScrollView>
-        {cinemas.map((c) => (
-          <CinemaItem
-            key={c.id}
-            onPress={() => {
-              navigation.navigate("CinemaDetails");
-            }}
-            cinema={c}
-          />
-        ))}
-      </ScrollView>
+      {cinema.data && (
+        <ScrollView>
+          {cinema.data.map((c) => (
+            <CinemaItem
+              key={c.id}
+              onPress={() => {
+                navigation.navigate("CinemaDetails", { cinema: c });
+              }}
+              cinema={c}
+            />
+          ))}
+        </ScrollView>
+      )}
       <TouchableHighlight
         onPress={() => {
           navigation.navigate("Upcoming");

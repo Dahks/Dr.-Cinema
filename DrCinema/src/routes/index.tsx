@@ -11,12 +11,16 @@ import MovieDetails from "../views/MovieDetails";
 import Upcoming from "../views/Upcoming";
 
 import { black, white } from "../styles/colors";
+import type { Cinema } from "../models/Cinema";
+import type { Movie, UpcomingMovie } from "../models/Movie";
+import UpcomingMovieDetails from "../views/UpcomingMovieDetails";
 
 // eslint-disable-next-line
 type RootStackParamList = {
   Cinemas: undefined,
-  CinemaDetails: undefined,
-  MovieDetails: undefined,
+  CinemaDetails: { cinema: Cinema },
+  MovieDetails: { movie: Movie },
+  UpcomingMovieDetails: { upcomingMovie: UpcomingMovie },
   Upcoming: undefined,
 };
 
@@ -50,6 +54,21 @@ type MovieDetailsRouteProp = RouteProp<RootStackParamList, "MovieDetails">;
 export type MovieDetailsProps = {
   navigation: MovieDetailsNavigationProp,
   route: MovieDetailsRouteProp,
+};
+
+type UpcomingMovieDetailsNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "UpcomingMovieDetails",
+>;
+type UpcomingMovieDetailsRouteProp = RouteProp<
+  RootStackParamList,
+  "UpcomingMovieDetails",
+>;
+
+// eslint-disable-next-line
+export type UpcomingMovieDetailsProps = {
+  navigation: UpcomingMovieDetailsNavigationProp,
+  route: UpcomingMovieDetailsRouteProp,
 };
 
 type UpcomingNavigationProp = StackNavigationProp<
@@ -104,6 +123,17 @@ const Routes = (): JSX.Element => (
         component={MovieDetails}
         options={{
           title: "Movie Details",
+          headerStyle: {
+            backgroundColor: black,
+          },
+          headerTintColor: white,
+        }}
+      />
+      <Stack.Screen
+        name="UpcomingMovieDetails"
+        component={UpcomingMovieDetails}
+        options={{
+          title: "Upcoming Movie Details",
           headerStyle: {
             backgroundColor: black,
           },

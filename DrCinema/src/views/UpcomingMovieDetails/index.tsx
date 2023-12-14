@@ -8,19 +8,22 @@ import {
 } from "react-native";
 import React from "react";
 import Txt from "../../components/Txt";
-import { type MovieDetailsProps } from "../../routes";
+import { type UpcomingMovieDetailsProps } from "../../routes";
 import ShowtimeItem from "../../components/ShowtimeItem";
 import styles from "../../styles/styles";
 import WebView from "react-native-webview";
 import { black, qblack, qwhite } from "../../styles/colors";
 
-const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
-  const movie = route.params.movie;
+const UpcomingMovieDetails = ({
+  navigation,
+  route,
+}: UpcomingMovieDetailsProps) => {
+  const movie = route.params.upcomingMovie;
 
   StatusBar.setBarStyle("light-content", true);
   return (
     <SafeAreaView style={styles.containerBackground}>
-      {movie.trailer ? (
+      {movie.trailerUrl ? (
         <View
           style={{
             height: 200,
@@ -29,16 +32,16 @@ const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
             width: "100%",
           }}
         >
-          <WebView source={{ uri: movie.trailer }} />
+          <WebView source={{ uri: movie.trailerUrl }} />
         </View>
       ) : (
         <Txt size="Small">No trailer</Txt>
       )}
       <ScrollView
         stickyHeaderIndices={[1]}
-        style={{ marginTop: movie.trailer ? 120 : 0 }}
+        style={{ marginTop: movie.trailerUrl ? 120 : 0 }}
       >
-        {movie.trailer && <View style={{ marginTop: 80 }}></View>}
+        {movie.trailerUrl && <View style={{ marginTop: 80 }}></View>}
         <View style={{ padding: 15, paddingTop: 5, backgroundColor: black }}>
           <View style={{ flexDirection: "row" }}>
             <Image
@@ -61,10 +64,12 @@ const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
               </Txt>
               <View style={{ flexDirection: "row" }}>
                 <Txt color={qwhite} style={{ marginRight: 75 }}>
-                  {"TODO year not in Movie type"}
+                  {movie.year}
                 </Txt>
                 {/* <Txt color={qwhite}>{movie.omdb[0].Runtime}</Txt> */}
-                <Txt color={qwhite}>{movie.duration}</Txt>
+                <Txt color={qwhite}>
+                  TODO Duration missing for upcoming movies
+                </Txt>
               </View>
             </View>
           </View>
@@ -72,33 +77,10 @@ const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
           <Txt size="Small" numberOfLines={10} color={qwhite}>
             {movie.plot}
           </Txt>
-          <View style={{ alignItems: "center", marginTop: 15 }}>
-            <Txt size="Large">Showtimes in Smárabíó</Txt>
-          </View>
         </View>
-        <ShowtimeItem
-          time="20:00"
-          purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
-        ></ShowtimeItem>
-        <ShowtimeItem
-          time="20:00"
-          purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
-        ></ShowtimeItem>
-        <ShowtimeItem
-          time="20:00"
-          purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
-        ></ShowtimeItem>
-        <ShowtimeItem
-          time="20:00"
-          purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
-        ></ShowtimeItem>
-        <ShowtimeItem
-          time="20:00"
-          purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
-        ></ShowtimeItem>
       </ScrollView>
     </SafeAreaView>
   );
 };
 
-export default MovieDetails;
+export default UpcomingMovieDetails;

@@ -1,6 +1,7 @@
 import { StyleSheet, TouchableHighlight, View } from "react-native";
 import React from "react";
 import { grey, qblack, white } from "../styles/colors";
+import styles from "../styles/styles";
 
 interface Props {
   children: any;
@@ -9,7 +10,7 @@ interface Props {
 
 const ListItem = ({ children, onPress }: Props) => {
   return (
-    <TouchableHighlight onPress={onPress} style={ItemListStyles.container}>
+    <TouchableHighlight onPress={onPress} style={[ItemListStyles.container]}>
       <View>{children}</View>
     </TouchableHighlight>
   );
@@ -19,6 +20,9 @@ export default ListItem;
 
 const ItemListStyles = StyleSheet.create({
   container: {
+    display: "flex",
+    justifyContent: "center",
+    // overflow: "hidden",
     backgroundColor: qblack,
     borderColor: grey,
     borderWidth: 3,

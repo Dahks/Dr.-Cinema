@@ -1,10 +1,10 @@
 import { StyleSheet } from "react-native";
-import { baccent, black, dark, darkest, white } from "./colors";
+import { black, qblack, white } from "./colors";
 
 export default StyleSheet.create({
   border: {
-    borderWidth: 1,
-    borderColor: baccent,
+    borderWidth: 2,
+    borderColor: "#fff",
     borderStyle: "solid",
   },
   containerBackground: {

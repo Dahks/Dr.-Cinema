@@ -3,16 +3,14 @@ import React from "react";
 import Txt from "./Txt";
 import { qwhite } from "../styles/colors";
 import ListItem from "./ListItem";
+import type { Movie } from "../models/Movie";
 
 interface Props {
-  title: string;
-  year: string;
-  genres: string;
-  image: string;
+  movie: Movie;
   onPress: any;
 }
 
-const MovieItem = ({ title, year, genres, image, onPress }: Props) => {
+const MovieItem = ({ movie, onPress }: Props) => {
   return (
     <ListItem onPress={onPress}>
       <View
@@ -23,17 +21,17 @@ const MovieItem = ({ title, year, genres, image, onPress }: Props) => {
         <Image
           style={{ height: 80, width: 60 }}
           source={{
-            uri: image,
+            uri: movie.poster,
           }}
           resizeMode="contain"
         ></Image>
-        <View>
-          <Txt size="Large">{title}</Txt>
+        <View style={{ flexShrink: 1 }}>
+          <Txt size="Large">{movie.title}</Txt>
           <Txt size="Small" color={qwhite}>
-            {year}
+            {`${movie.duration}min`}
           </Txt>
           <Txt size="Small" color={qwhite}>
-            {genres}
+            {movie.genres}
           </Txt>
         </View>
       </View>
