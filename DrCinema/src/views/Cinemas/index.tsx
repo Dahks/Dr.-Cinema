@@ -6,6 +6,7 @@ import {
   Text,
   TouchableHighlight,
   ScrollView,
+  BackHandler,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import Txt from "../../components/Txt";
@@ -28,6 +29,7 @@ import ListItem from "../../components/ListItem";
 import { authenticate } from "../../redux/features/counter/authSlice";
 import AuthenticationStatus from "../../components/AuthenticationStatus";
 import { useGetCinemasQuery } from "../../services/cinemas";
+import { setSelectedCinema } from "../../redux/features/counter/selectionSlice";
 
 const Cinemas = ({ navigation, route }: CinemasProps) => {
   // const [cinemas, setCinemas] = useState<Cinema[]>([]);
@@ -65,7 +67,8 @@ const Cinemas = ({ navigation, route }: CinemasProps) => {
               <CinemaItem
                 key={c.id}
                 onPress={() => {
-                  navigation.navigate("CinemaDetails", { cinema: c });
+                  dispatch(setSelectedCinema(c));
+                  navigation.navigate("CinemaDetails");
                 }}
                 cinema={c}
               />

@@ -13,12 +13,10 @@ import ShowtimeItem from "../../components/ShowtimeItem";
 import styles from "../../styles/styles";
 import WebView from "react-native-webview";
 import { black, qblack, qwhite } from "../../styles/colors";
+import { useAppSelector } from "../../redux/hooks";
 
-const UpcomingMovieDetails = ({
-  navigation,
-  route,
-}: UpcomingMovieDetailsProps) => {
-  const movie = route.params.upcomingMovie;
+const UpcomingMovieDetails = ({ navigation }: UpcomingMovieDetailsProps) => {
+  const movie = useAppSelector((state) => state.selection.movie);
 
   StatusBar.setBarStyle("light-content", true);
   return (

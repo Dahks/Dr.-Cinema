@@ -12,11 +12,14 @@ import MovieItem from "../../components/MovieItem";
 import styles from "../../styles/styles";
 import { qwhite } from "../../styles/colors";
 import { useGetMoviesQuery } from "../../services/movies";
-import { useAppSelector } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import type { Movie } from "../../models/Movie";
+import { type Cinema } from "../../models/Cinema";
+import { setSelectedMovie } from "../../redux/features/counter/selectionSlice";
 
-const CinemaDetails = ({ navigation, route }: CinemaDetailsProps) => {
-  const cinema = route.params.cinema;
+const CinemaDetails = ({ navigation }: CinemaDetailsProps) => {
+  const cinema: Cinema = useAppSelector((state) => state.selection.cinema);
+  const dispatch = useAppDispatch();
 
   const auth = useAppSelector((state) => state.auth);
   const movies = useGetMoviesQuery(undefined, {
@@ -68,7 +71,9 @@ const CinemaDetails = ({ navigation, route }: CinemaDetailsProps) => {
                 key={movie.id}
                 movie={movie}
                 onPress={() => {
-                  navigation.navigate("MovieDetails", { movie });
+                  dispatch(setSelectedMovie(movie));
+                  console.log(movie);
+                  navigation.navigate("MovieDetails");
                 }}
               />
             ))}
