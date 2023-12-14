@@ -9,7 +9,7 @@ export interface Cinema {
 }
 
 export interface APICinema {
-  address: string;
+  "address\t": string;
   city: string;
   name: string;
   phone: string;
@@ -19,12 +19,23 @@ export interface APICinema {
   google_map: string;
 }
 
+const getAddress = (
+  address: string | undefined,
+  city: string | undefined
+): string => {
+  if (address && city) return `${address}, ${city}`;
+  return address ?? city ?? "Unknown";
+};
+const processDescription = (description: string | null) => {
+  return description?.replace(/<br\s*\/?>|<b>/gi, "") ?? "";
+};
+
 export const toCinema = (apiCinema: APICinema) => {
   const cinema: Cinema = {
     id: apiCinema.id,
     name: apiCinema.name,
-    description: apiCinema.description ?? "",
-    address: `${apiCinema.address}, ${apiCinema.city}`,
+    description: processDescription(apiCinema.description),
+    address: getAddress(apiCinema["address\t"], apiCinema.city),
     phone: apiCinema.phone,
     websiteUrl: apiCinema.website,
     googleMap: apiCinema.google_map,

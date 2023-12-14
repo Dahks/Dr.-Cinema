@@ -20,6 +20,8 @@ const cinema = {
 };
 
 const CinemaDetails = ({ navigation, route }: CinemaDetailsProps) => {
+  const cinema = route.params.cinema;
+
   StatusBar.setBarStyle("light-content", true);
   return (
     <SafeAreaView style={styles.containerBackground}>
@@ -30,13 +32,13 @@ const CinemaDetails = ({ navigation, route }: CinemaDetailsProps) => {
         <Txt
           color={qwhite}
           onPress={() => {
-            Linking.openURL("https://" + cinema.website).catch((err) => {
+            Linking.openURL(`https://${cinema.websiteUrl}`).catch((err) => {
               console.error("An error occurred", err);
             });
           }}
           style={{ textDecorationLine: "underline" }}
         >
-          {cinema.website}
+          {cinema.websiteUrl}
         </Txt>
       </View>
       <View style={{ margin: 20 }}>
@@ -44,7 +46,7 @@ const CinemaDetails = ({ navigation, route }: CinemaDetailsProps) => {
           {cinema.description}
         </Txt>
         <Txt color={qwhite} style={{ marginBottom: 10 }}>
-          {cinema["address\t"]}, {cinema.city}
+          {cinema.address}
         </Txt>
         <Txt color={qwhite}>{cinema.phone}</Txt>
       </View>

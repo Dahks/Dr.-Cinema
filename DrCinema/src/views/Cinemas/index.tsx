@@ -96,7 +96,7 @@ const Cinemas = ({ navigation, route }: CinemasProps) => {
             <CinemaItem
               key={c.id}
               onPress={() => {
-                navigation.navigate("CinemaDetails");
+                navigation.navigate("CinemaDetails", { cinema: c });
               }}
               cinema={c}
             />

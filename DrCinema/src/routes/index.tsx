@@ -11,11 +11,12 @@ import MovieDetails from "../views/MovieDetails";
 import Upcoming from "../views/Upcoming";
 
 import { black, white } from "../styles/colors";
+import type { Cinema } from "../models/Cinema";
 
 // eslint-disable-next-line
 type RootStackParamList = {
   Cinemas: undefined,
-  CinemaDetails: undefined,
+  CinemaDetails: { cinema: Cinema },
   MovieDetails: undefined,
   Upcoming: undefined,
 };
