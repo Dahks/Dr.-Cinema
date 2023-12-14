@@ -12,7 +12,11 @@ import { type UpcomingProps } from "../../routes";
 import styles from "../../styles/styles";
 import UpcomingMovieItem from "../../components/UpcomingMovieItem";
 import { useGetUpcomingMoviesQuery } from "../../services/movies";
-import { sortUpcomingMovies, type UpcomingMovie } from "../../models/Movie";
+import {
+  releaseDateSort,
+  sortUpcomingMovies,
+  type UpcomingMovie,
+} from "../../models/Movie";
 import { setSelectedMovie } from "../../redux/features/counter/selectionSlice";
 
 const Upcoming = ({ navigation, route }: UpcomingProps) => {
@@ -25,16 +29,19 @@ const Upcoming = ({ navigation, route }: UpcomingProps) => {
   });
 
   const renderUpComingMovies = () => {
-    return data?.map((movie: UpcomingMovie) => (
-      <UpcomingMovieItem
-        key={movie.id}
-        upcomingMovie={movie}
-        onPress={() => {
-          dispatch(setSelectedMovie(movie));
-          navigation?.navigate("UpcomingMovieDetails");
-        }}
-      />
-    ));
+    return data
+      ?.slice()
+      .sort(releaseDateSort)
+      .map((movie: UpcomingMovie) => (
+        <UpcomingMovieItem
+          key={movie.id}
+          upcomingMovie={movie}
+          onPress={() => {
+            dispatch(setSelectedMovie(movie));
+            navigation?.navigate("UpcomingMovieDetails");
+          }}
+        />
+      ));
   };
 
   return (

@@ -31,7 +31,7 @@ const processDescription = (description: string | null) => {
 };
 
 export const cinemaSort = (a: Cinema, b: Cinema) => {
-  const icelandicAlphabet = "aábdðeéfghiíjklmnoóprstuúvxyýzþæö";
+  const icelandicAlphabet = "0123456789aábcdðeéfghiíjklmnoóprstuúvxyýzþæö";
 
   const aName = a.name.toLowerCase();
   const bName = b.name.toLowerCase();
