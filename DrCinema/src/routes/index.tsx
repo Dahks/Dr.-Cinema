@@ -14,6 +14,7 @@ import { black, white } from "../styles/colors";
 import type { Cinema } from "../models/Cinema";
 import type { Movie, UpcomingMovie } from "../models/Movie";
 import UpcomingMovieDetails from "../views/UpcomingMovieDetails";
+import { useAppSelector } from "../redux/hooks";
 
 // eslint-disable-next-line
 type RootStackParamList = {
@@ -85,84 +86,83 @@ export type UpcomingProps = {
 
 const Stack = createStackNavigator();
 
-const Routes = (): JSX.Element => (
-  <NavigationContainer>
-    <Stack.Navigator
-      initialRouteName="Cinemas"
-      screenOptions={
-        {
-          // headerTransparent: true,
-          // headerShadowVisible: true,
+const Routes = (): JSX.Element => {
+  const cinema: Cinema = useAppSelector((state) => state.selection.cinema);
+  return (
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="Cinemas"
+        screenOptions={
+          {
+            // headerTransparent: true,
+            // headerShadowVisible: true,
+          }
         }
-      }
-    >
-      <Stack.Screen
-        name="Cinemas"
-        component={Cinemas}
-        options={{
-          title: "Kvikmyndahús",
-          headerStyle: {
-            backgroundColor: black,
-          },
-          headerTitleStyle: { fontSize: 32 },
-          headerTitleAlign: "center",
-          headerTintColor: white,
-        }}
-      />
-      <Stack.Screen
-        name="CinemaDetails"
-        component={CinemaDetails}
-        options={{
-          title: "TODO NAFN BIÓ",
-          headerStyle: {
-            backgroundColor: black,
-          },
-          headerTitleStyle: { fontSize: 32 },
-          headerTitleAlign: "center",
-          headerTintColor: white,
-        }}
-      />
-      <Stack.Screen
-        name="MovieDetails"
-        component={MovieDetails}
-        options={{
-          title: "TODO NAFN A MYND",
-          headerStyle: {
-            backgroundColor: black,
-          },
-          headerTitleStyle: { fontSize: 32 },
-          headerTitleAlign: "center",
-          headerTintColor: white,
-        }}
-      />
-      <Stack.Screen
-        name="UpcomingMovieDetails"
-        component={UpcomingMovieDetails}
-        options={{
-          title: "TODO NAFN A MYND",
-          headerStyle: {
-            backgroundColor: black,
-          },
-          headerTitleStyle: { fontSize: 32 },
-          headerTitleAlign: "center",
-          headerTintColor: white,
-        }}
-      />
-      <Stack.Screen
-        name="Upcoming"
-        component={Upcoming}
-        options={{
-          title: "Væntanlegar",
-          headerStyle: {
-            backgroundColor: black,
-          },
-          headerTitleStyle: { fontSize: 32 },
-          headerTitleAlign: "center",
-          headerTintColor: white,
-        }}
-      />
-    </Stack.Navigator>
-  </NavigationContainer>
-);
+      >
+        <Stack.Screen
+          name="Cinemas"
+          component={Cinemas}
+          options={{
+            title: "Kvikmyndahús",
+            headerStyle: {
+              backgroundColor: black,
+            },
+            headerTitleStyle: { fontSize: 32 },
+            headerTitleAlign: "center",
+            headerTintColor: white,
+          }}
+        />
+        <Stack.Screen
+          name="CinemaDetails"
+          component={CinemaDetails}
+          options={{
+            title: cinema.name,
+            headerStyle: {
+              backgroundColor: black,
+            },
+            headerTitleStyle: { fontSize: 32 },
+            headerTitleAlign: "center",
+            headerTintColor: white,
+          }}
+        />
+        <Stack.Screen
+          name="MovieDetails"
+          component={MovieDetails}
+          options={{
+            title: "",
+            headerStyle: {
+              backgroundColor: black,
+            },
+            headerTintColor: white,
+          }}
+        />
+        <Stack.Screen
+          name="UpcomingMovieDetails"
+          component={UpcomingMovieDetails}
+          options={{
+            title: "",
+            headerStyle: {
+              backgroundColor: black,
+            },
+            headerTintColor: white,
+          }}
+        />
+        <Stack.Screen
+          name="Upcoming"
+          component={Upcoming}
+          options={{
+            title: "Væntanlegar",
+            headerStyle: {
+              backgroundColor: black,
+            },
+            headerTitleStyle: { fontSize: 32 },
+            headerTitleAlign: "center",
+            headerTintColor: white,
+          }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
 
 export default Routes;
