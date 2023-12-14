@@ -58,7 +58,9 @@ const CinemaDetails = ({ navigation, route }: CinemaDetailsProps) => {
         <Txt color={qwhite}>{cinema.phone}</Txt>
       </View>
 
-      {screeningMovies.length !== 0 ? (
+      {movies.isLoading ? (
+        <Txt>{"Loading today's screenings..."}</Txt>
+      ) : screeningMovies.length !== 0 ? (
         <>
           <Txt size="Large">Movies screening today</Txt>
           <ScrollView>
@@ -67,14 +69,14 @@ const CinemaDetails = ({ navigation, route }: CinemaDetailsProps) => {
                 key={movie.id}
                 movie={movie}
                 onPress={() => {
-                  navigation.navigate("MovieDetails");
+                  navigation.navigate("MovieDetails", { movie });
                 }}
               />
             ))}
           </ScrollView>
         </>
       ) : (
-        <Txt>No movies screening today...</Txt>
+        <Txt>No movies screening today</Txt>
       )}
     </SafeAreaView>
   );

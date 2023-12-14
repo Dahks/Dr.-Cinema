@@ -29,7 +29,9 @@ const Upcoming = ({ navigation, route }: UpcomingProps) => {
         key={movie.id}
         upcomingMovie={movie}
         onPress={() => {
-          navigation?.navigate("MovieDetails");
+          navigation?.navigate("UpcomingMovieDetails", {
+            upcomingMovie: movie,
+          });
         }}
       />
     ));
