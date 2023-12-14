@@ -24,7 +24,7 @@ const getAddress = (
   city: string | undefined
 ): string => {
   if (address && city) return `${address}, ${city}`;
-  return address ?? city ?? "Unknown";
+  return address ?? city ?? "Óþekkt heimilisfang";
 };
 const processDescription = (description: string | null) => {
   return description?.replace(/<br\s*\/?>|<b>/gi, "") ?? "";
