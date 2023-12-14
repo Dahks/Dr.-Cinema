@@ -30,6 +30,22 @@ const processDescription = (description: string | null) => {
   return description?.replace(/<br\s*\/?>|<b>/gi, "") ?? "";
 };
 
+export const cinemaSort = (a: Cinema, b: Cinema) => {
+  const icelandicAlphabet = "aábdðeéfghiíjklmnoóprstuúvxyýzþæö";
+
+  const aName = a.name.toLowerCase();
+  const bName = b.name.toLowerCase();
+
+  for (let i = 0; i < Math.min(aName.length, bName.length); i++) {
+    const aIndex = icelandicAlphabet.indexOf(aName[i]);
+    const bIndex = icelandicAlphabet.indexOf(bName[i]);
+
+    if (aIndex !== bIndex) {
+      return aIndex - bIndex;
+    }
+  }
+};
+
 export const toCinema = (apiCinema: APICinema) => {
   const cinema: Cinema = {
     id: apiCinema.id,

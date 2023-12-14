@@ -18,7 +18,7 @@ import {
 } from "../../redux/features/counter/counterSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import CinemaItem from "../../components/CinemaItem";
-import { toCinema } from "../../models/Cinema";
+import { cinemaSort, toCinema } from "../../models/Cinema";
 import type { APICinema, Cinema } from "../../models/Cinema";
 import ListItem from "../../components/ListItem";
 // import {
@@ -58,15 +58,18 @@ const Cinemas = ({ navigation, route }: CinemasProps) => {
       <AuthenticationStatus />
       {cinema.data && (
         <ScrollView contentContainerStyle={{ paddingBottom: 110 }}>
-          {cinema.data.map((c) => (
-            <CinemaItem
-              key={c.id}
-              onPress={() => {
-                navigation.navigate("CinemaDetails", { cinema: c });
-              }}
-              cinema={c}
-            />
-          ))}
+          {cinema.data
+            .slice()
+            .sort(cinemaSort)
+            .map((c) => (
+              <CinemaItem
+                key={c.id}
+                onPress={() => {
+                  navigation.navigate("CinemaDetails", { cinema: c });
+                }}
+                cinema={c}
+              />
+            ))}
         </ScrollView>
       )}
       <TouchableHighlight
