@@ -47,9 +47,9 @@ const Upcoming = ({ navigation, route }: UpcomingProps) => {
   return (
     <SafeAreaView style={styles.containerBackground}>
       {isLoading ? (
-        <Txt>Loading upcoming movies...</Txt>
+        <Txt>Hleður væntanlegum myndum...</Txt>
       ) : error ? (
-        <Txt>Error occurred</Txt>
+        <Txt>Villa</Txt>
       ) : (
         <ScrollView>{renderUpComingMovies()}</ScrollView>
       )}
