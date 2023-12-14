@@ -28,7 +28,7 @@ const MovieItem = ({ movie, onPress }: Props) => {
         <View style={{ flexShrink: 1 }}>
           <Txt size="Large">{movie.title}</Txt>
           <Txt size="Small" color={qwhite}>
-            {`${movie.duration}min`}
+            {`${movie.year}`}
           </Txt>
           <Txt size="Small" color={qwhite}>
             {movie.genres}

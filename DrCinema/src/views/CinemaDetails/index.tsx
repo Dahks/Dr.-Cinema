@@ -56,10 +56,12 @@ const CinemaDetails = ({ navigation, route }: CinemaDetailsProps) => {
       </View>
 
       {movies.isLoading ? (
-        <Txt>{"Loading today's screenings..."}</Txt>
+        <Txt style={{ marginLeft: 20 }}>{"Hleður kvikmyndasýningum..."}</Txt>
       ) : screeningMovies.length !== 0 ? (
         <>
-          <Txt size="Large">Movies screening today</Txt>
+          <Txt size="Large" style={{ marginLeft: 20 }}>
+            Kvikmyndasýningar í dag
+          </Txt>
           <ScrollView>
             {screeningMovies.map((movie) => (
               <MovieItem
@@ -73,7 +75,9 @@ const CinemaDetails = ({ navigation, route }: CinemaDetailsProps) => {
           </ScrollView>
         </>
       ) : (
-        <Txt>No movies screening today</Txt>
+        <Txt size="Large" style={{ marginLeft: 20 }}>
+          Engar kvikmyndasýningar í dag
+        </Txt>
       )}
     </SafeAreaView>
   );
