@@ -4,6 +4,9 @@ import {
   createAsyncThunk,
 } from "@reduxjs/toolkit";
 
+import { USERNAME, PASSWORD } from "@env";
+import { btoa } from "react-native-quick-base64";
+
 interface APIAuth {
   success: boolean;
   token: string;
@@ -51,11 +54,12 @@ const authSlice = createSlice({
 export const authenticate = createAsyncThunk<APIAuth>(
   "auth/authenticate",
   async () => {
+    console.log("Basic " + btoa(USERNAME + ":" + PASSWORD));
     const url = "https://api.kvikmyndir.is/authenticate";
     const response = await fetch(url, {
       method: "POST",
       headers: {
-        Authorization: "Basic R3VsbGk6OFJMVUNtUUhwdzQzZFA2",
+        Authorization: "Basic " + btoa(USERNAME + ":" + PASSWORD),
       },
     });
 
