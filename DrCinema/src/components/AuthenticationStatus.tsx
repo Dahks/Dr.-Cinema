@@ -31,10 +31,10 @@ const AuthenticationStatus = () => {
       ></View>
       <Txt size="Tiny">
         {auth.isAuthenticated
-          ? "Authenticated"
+          ? "Auðkenndur"
           : auth.isLoading
-            ? "Loading"
-            : "Not authenticated"}
+            ? "Hleður"
+            : "Ekki auðkenndur"}
       </Txt>
     </View>
   );

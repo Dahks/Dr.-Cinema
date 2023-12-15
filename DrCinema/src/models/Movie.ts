@@ -94,6 +94,13 @@ const toShowtime = (apiShowtimes: APIShowtime[]): Showtime[] => {
   return showtimes;
 };
 
+export const releaseDateSort = (a: UpcomingMovie, b: UpcomingMovie) => {
+  const dateA = new Date(a.releaseDate).getTime();
+  const dateB = new Date(b.releaseDate).getTime();
+
+  return dateA - dateB;
+};
+
 export const toMovie = (apiMovie: APIMovie) => {
   const movie: Movie = {
     id: apiMovie.id,

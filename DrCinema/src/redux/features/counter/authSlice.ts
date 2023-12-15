@@ -4,6 +4,9 @@ import {
   createAsyncThunk,
 } from "@reduxjs/toolkit";
 
+import { USERNAME, PASSWORD } from "@env";
+import { btoa } from "react-native-quick-base64";
+
 interface APIAuth {
   success: boolean;
   token: string;
@@ -55,7 +58,7 @@ export const authenticate = createAsyncThunk<APIAuth>(
     const response = await fetch(url, {
       method: "POST",
       headers: {
-        Authorization: "Basic R3VsbGk6OFJMVUNtUUhwdzQzZFA2",
+        Authorization: "Basic " + btoa(USERNAME + ":" + PASSWORD),
       },
     });
 

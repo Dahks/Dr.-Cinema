@@ -24,14 +24,14 @@ const getAddress = (
   city: string | undefined
 ): string => {
   if (address && city) return `${address}, ${city}`;
-  return address ?? city ?? "Unknown";
+  return address ?? city ?? "Óþekkt heimilisfang";
 };
 const processDescription = (description: string | null) => {
   return description?.replace(/<br\s*\/?>|<b>/gi, "") ?? "";
 };
 
 export const cinemaSort = (a: Cinema, b: Cinema) => {
-  const icelandicAlphabet = "aábdðeéfghiíjklmnoóprstuúvxyýzþæö";
+  const icelandicAlphabet = "0123456789aábcdðeéfghiíjklmnoóprstuúvxyýzþæö";
 
   const aName = a.name.toLowerCase();
   const bName = b.name.toLowerCase();

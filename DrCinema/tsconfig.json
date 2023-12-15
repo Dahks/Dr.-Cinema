@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "jsx": "react",
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "typeRoots": ["./types", "./node_modules/@types"],
   },
   "extends": "expo/tsconfig.base"
 }

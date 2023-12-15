@@ -87,18 +87,13 @@ export type UpcomingProps = {
 const Stack = createStackNavigator();
 
 const Routes = (): JSX.Element => {
-  const cinema: Cinema = useAppSelector((state) => state.selection.cinema);
+  const cinema: Cinema | undefined = useAppSelector(
+    (state) => state.selection.cinema
+  );
+
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Cinemas"
-        screenOptions={
-          {
-            // headerTransparent: true,
-            // headerShadowVisible: true,
-          }
-        }
-      >
+      <Stack.Navigator initialRouteName="Cinemas">
         <Stack.Screen
           name="Cinemas"
           component={Cinemas}
@@ -107,7 +102,7 @@ const Routes = (): JSX.Element => {
             headerStyle: {
               backgroundColor: black,
             },
-            headerTitleStyle: { fontSize: 32 },
+            headerTitleStyle: { fontSize: 24 },
             headerTitleAlign: "center",
             headerTintColor: white,
           }}
@@ -116,11 +111,11 @@ const Routes = (): JSX.Element => {
           name="CinemaDetails"
           component={CinemaDetails}
           options={{
-            title: cinema.name,
+            title: cinema?.name ?? "loading...",
             headerStyle: {
               backgroundColor: black,
             },
-            headerTitleStyle: { fontSize: 32 },
+            headerTitleStyle: { fontSize: 24 },
             headerTitleAlign: "center",
             headerTintColor: white,
           }}
@@ -155,7 +150,7 @@ const Routes = (): JSX.Element => {
             headerStyle: {
               backgroundColor: black,
             },
-            headerTitleStyle: { fontSize: 32 },
+            headerTitleStyle: { fontSize: 24 },
             headerTitleAlign: "center",
             headerTintColor: white,
           }}

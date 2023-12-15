@@ -72,7 +72,6 @@ const CinemaDetails = ({ navigation }: CinemaDetailsProps) => {
                 movie={movie}
                 onPress={() => {
                   dispatch(setSelectedMovie(movie));
-                  console.log(movie);
                   navigation.navigate("MovieDetails");
                 }}
               />
