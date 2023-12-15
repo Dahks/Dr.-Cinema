@@ -1,18 +1,18 @@
 import {
-  Button,
   View,
   StatusBar,
   SafeAreaView,
   Image,
   ScrollView,
+  TouchableWithoutFeedback,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import Txt from "../../components/Txt";
 import { type MovieDetailsProps } from "../../routes";
 import ShowtimeItem from "../../components/ShowtimeItem";
 import styles from "../../styles/styles";
 import WebView from "react-native-webview";
-import { black, qblack, qwhite } from "../../styles/colors";
+import { black, qblack, qwhite, white } from "../../styles/colors";
 import { type Movie } from "../../models/Movie";
 import { useAppSelector } from "../../redux/hooks";
 
@@ -24,52 +24,67 @@ const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
   ).schedules;
   let showtimeNumber = 0;
 
+  const [expandedPlot, setExpandedPlot] = useState(false);
+
   StatusBar.setBarStyle("light-content", true);
   return (
     <SafeAreaView style={styles.containerBackground}>
-      {movie.trailer ? (
-        <View
-          style={{
-            height: 200,
-            ...styles.border,
-            position: "absolute",
-            width: "100%",
-          }}
-        >
-          <WebView source={{ uri: movie.trailer }} />
-        </View>
-      ) : (
-        <View style={{ alignItems: "center", margin: 20 }}>
-          <Txt size="large" bold={true}>
-            Engin stikla í boði :(
-          </Txt>
-        </View>
-      )}
-      <ScrollView
-        stickyHeaderIndices={[1]}
-        style={{ marginTop: movie.trailer ? 120 : 0 }}
-      >
-        {movie.trailer && <View style={{ marginTop: 80 }}></View>}
-        <View style={{ padding: 15, paddingTop: 5, backgroundColor: black }}>
+      <ScrollView stickyHeaderIndices={[0, 1]}>
+        {movie.trailer ? (
+          <View
+            style={{
+              height: 200,
+              ...styles.border,
+              position: "absolute",
+              width: "100%",
+              // top: positionX,
+            }}
+          >
+            <WebView source={{ uri: movie.trailer }} />
+          </View>
+        ) : (
+          <View style={{ alignItems: "center", margin: 20 }}>
+            <Txt size="large" bold={true}>
+              Engin stikla í boði :(
+            </Txt>
+          </View>
+        )}
+        {!movie.trailer && <View style={{ marginTop: 30 }}></View>}
+
+        <View style={{ paddingHorizontal: 15, marginTop: -40, zIndex: 10 }}>
+          <View
+            style={{
+              position: "absolute",
+              height: "93%",
+              width: "130%",
+              top: 30,
+              backgroundColor: black,
+              alignSelf: "center",
+            }}
+          />
           <View style={{ flexDirection: "row" }}>
-            <Image
-              style={{
-                width: 100,
-                height: 150,
-                borderRadius: 3,
-                marginLeft: -5,
-              }}
-              source={{
-                uri: movie.poster,
-              }}
-              resizeMode="contain"
-            ></Image>
+            <View pointerEvents="none">
+              <Image
+                style={{
+                  width: 100,
+                  height: 150,
+                  borderRadius: 3,
+                  marginLeft: -5,
+                  borderWidth: 0.2,
+                  borderColor: white,
+                }}
+                source={{
+                  uri: movie.poster,
+                }}
+                resizeMode="contain"
+              />
+            </View>
             <View
               style={{
                 flex: 1,
-                justifyContent: "flex-end",
-                margin: 10,
-                marginTop: 0,
+                justifyContent: "center",
+                paddingTop: 10,
+                marginHorizontal: 10,
               }}
             >
               <Txt size="Huge" numberOfLines={2}>
@@ -86,10 +101,29 @@ const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
           <Txt color={"#7d7dff"} style={{ marginBottom: 10, marginTop: 10 }}>
             {movie.genres}{" "}
           </Txt>
-          <Txt size="Small" numberOfLines={30} color={qwhite}>
-            {movie.plot}
-          </Txt>
-          <View style={{ alignItems: "center", marginTop: 15 }}>
+          <TouchableWithoutFeedback
+            onPress={() => {
+              setExpandedPlot(!expandedPlot);
+            }}
+          >
+            <View>
+              <Txt
+                size="Small"
+                numberOfLines={expandedPlot ? 100 : 2}
+                color={qwhite}
+              >
+                {movie.plot}
+              </Txt>
+            </View>
+          </TouchableWithoutFeedback>
+          <View
+            style={{
+              alignItems: "center",
+              marginTop: 15,
+              backgroundColor: black,
+              paddingBottom: 10,
+            }}
+          >
             <Txt size="Large">Sýningartímar</Txt>
           </View>
         </View>
