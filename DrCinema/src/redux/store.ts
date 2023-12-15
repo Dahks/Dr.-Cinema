@@ -1,22 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from "./features/counter/counterSlice";
-// import cinemaReducer from "./features/counter/cinemaSlice";
-import authReducer from "./features/counter/authSlice";
+import authReducer from "./features/authSlice";
 import { cinemasApi } from "../services/cinemas";
 import { moviesApi } from "../services/movies";
-import selectionSlice from "./features/counter/selectionSlice";
+import selectionSlice from "./features/selectionSlice";
 
 const store = configureStore({
   reducer: {
-    counter: counterReducer,
     selection: selectionSlice,
-    // cinema: cinemaReducer,
     auth: authReducer,
     [cinemasApi.reducerPath]: cinemasApi.reducer,
     [moviesApi.reducerPath]: moviesApi.reducer,
-    /*
-    uiState: UIReducer,    
-    */
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
@@ -24,7 +17,6 @@ const store = configureStore({
       .concat(moviesApi.middleware),
 });
 
-// Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 

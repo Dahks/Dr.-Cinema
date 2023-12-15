@@ -10,12 +10,12 @@ import Txt from "../../components/Txt";
 import { type CinemaDetailsProps } from "../../routes";
 import MovieItem from "../../components/MovieItem";
 import styles from "../../styles/styles";
-import { qwhite, white } from "../../styles/colors";
+import { qwhite } from "../../styles/colors";
 import { useGetMoviesQuery } from "../../services/movies";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import type { Movie } from "../../models/Movie";
 import { type Cinema } from "../../models/Cinema";
-import { setSelectedMovie } from "../../redux/features/counter/selectionSlice";
+import { setSelectedMovie } from "../../redux/features/selectionSlice";
 
 const CinemaDetails = ({ navigation }: CinemaDetailsProps) => {
   const cinema = useAppSelector((state) => state.selection.cinema) as Cinema;

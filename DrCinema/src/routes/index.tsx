@@ -9,10 +9,8 @@ import Cinemas from "../views/Cinemas";
 import CinemaDetails from "../views/CinemaDetails";
 import MovieDetails from "../views/MovieDetails";
 import Upcoming from "../views/Upcoming";
-
 import { black, white } from "../styles/colors";
 import type { Cinema } from "../models/Cinema";
-import type { Movie, UpcomingMovie } from "../models/Movie";
 import UpcomingMovieDetails from "../views/UpcomingMovieDetails";
 import { useAppSelector } from "../redux/hooks";
 

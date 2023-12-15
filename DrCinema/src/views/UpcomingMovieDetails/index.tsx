@@ -9,7 +9,7 @@ import { useAppSelector } from "../../redux/hooks";
 import type { UpcomingMovie } from "../../models/Movie";
 
 const UpcomingMovieDetails = ({ navigation }: UpcomingMovieDetailsProps) => {
-  // This is super ugly, mapping the type of movie, which could be Movie | UpcomingMovie | undefined, to strictly be UpcomingMovie.
+  // This is super ugly (... as UpcomingMovie), mapping the type of movie, which could be Movie | UpcomingMovie | undefined, to strictly be UpcomingMovie.
   // however, there is no clean way of doing this by having a selectionSlice.
   // The best solution here is to input the upcoming movie as a prop into this component,
   // which ensures that an UpcomingMovie object is being passed into this component
@@ -30,7 +30,6 @@ const UpcomingMovieDetails = ({ navigation }: UpcomingMovieDetailsProps) => {
               ...styles.border,
               position: "absolute",
               width: "100%",
-              // top: positionX,
             }}
           >
             <WebView source={{ uri: movie.trailerUrl }} />

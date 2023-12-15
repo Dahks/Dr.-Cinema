@@ -1,14 +1,13 @@
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { type RootState } from "../../store";
-import type { Cinema } from "../../../models/Cinema";
-import type { Movie, UpcomingMovie } from "../../../models/Movie";
+import { type RootState } from "../store";
+import type { Cinema } from "../../models/Cinema";
+import type { Movie, UpcomingMovie } from "../../models/Movie";
 
 interface SelectionState {
   movie?: Movie | UpcomingMovie;
   cinema?: Cinema;
 }
 
-// IMPORT TYPES FOR MOVIE / CINEMA
 const initialState: SelectionState = {
   movie: undefined,
   cinema: undefined,

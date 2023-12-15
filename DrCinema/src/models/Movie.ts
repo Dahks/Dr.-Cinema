@@ -35,12 +35,7 @@ export interface APIMovie {
 export interface UpcomingMovie {
   id: number;
   title: string;
-  // actors_abridged: any[];
-  // alternativeTitles: string;
-  // directors_abridged: any[];
   genres: string; // maybe cleaner to have string[]
-  // ids: JSON;
-  // omdb: any[];
   plot: string;
   poster: string;
   releaseDate: string;

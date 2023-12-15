@@ -19,7 +19,7 @@ import {
   sortUpcomingMovies,
   type UpcomingMovie,
 } from "../../models/Movie";
-import { setSelectedMovie } from "../../redux/features/counter/selectionSlice";
+import { setSelectedMovie } from "../../redux/features/selectionSlice";
 
 const Upcoming = ({ navigation, route }: UpcomingProps) => {
   StatusBar.setBarStyle("light-content", true);

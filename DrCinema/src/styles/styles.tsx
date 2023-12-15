@@ -1,7 +1,8 @@
 import { StyleSheet } from "react-native";
-import { black, qblack, white } from "./colors";
+import { black } from "./colors";
 
 export default StyleSheet.create({
+  // mainly used for UI debugging
   border: {
     borderWidth: 2,
     borderColor: "#fff",
