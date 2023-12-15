@@ -55,7 +55,7 @@ const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
           <View
             style={{
               position: "absolute",
-              height: "93%",
+              height: "80%",
               width: "130%",
               top: 30,
               backgroundColor: black,
@@ -122,6 +122,8 @@ const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
               marginTop: 15,
               backgroundColor: black,
               paddingBottom: 10,
+              width: "130%",
+              alignSelf: "center",
             }}
           >
             <Txt size="Large">Sýningartímar</Txt>
