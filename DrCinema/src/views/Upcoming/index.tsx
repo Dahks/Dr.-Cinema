@@ -2,7 +2,6 @@ import {
   Button,
   StatusBar,
   View,
-  SafeAreaView,
   ScrollView,
   ActivityIndicator,
   StyleSheet,
@@ -47,7 +46,7 @@ const Upcoming = ({ navigation, route }: UpcomingProps) => {
   };
 
   return (
-    <SafeAreaView style={styles.containerBackground}>
+    <View style={styles.containerBackground}>
       {isLoading ? (
         <View style={upcomingStyles.loadingContainer}>
           <ActivityIndicator size="large" color={"#7d7dff"} />
@@ -56,9 +55,14 @@ const Upcoming = ({ navigation, route }: UpcomingProps) => {
       ) : error ? (
         <Txt>Villa</Txt>
       ) : (
-        <ScrollView>{renderUpComingMovies()}</ScrollView>
+        <ScrollView
+          contentContainerStyle={{ paddingBottom: 80 }}
+          showsHorizontalScrollIndicator={false}
+        >
+          {renderUpComingMovies()}
+        </ScrollView>
       )}
-    </SafeAreaView>
+    </View>
   );
 };
 
