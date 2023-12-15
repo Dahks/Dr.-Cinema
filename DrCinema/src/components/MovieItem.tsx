@@ -19,7 +19,13 @@ const MovieItem = ({ movie, onPress }: Props) => {
         }}
       >
         <Image
-          style={{ height: 80, width: 60 }}
+          style={{
+            height: 80,
+            width: 60,
+            marginRight: 5,
+            borderRadius: 7,
+            marginLeft: -5,
+          }}
           source={{
             uri: movie.poster,
           }}
@@ -27,7 +33,7 @@ const MovieItem = ({ movie, onPress }: Props) => {
         ></Image>
         <View style={{ flexShrink: 1 }}>
           <Txt size="Large">{movie.title}</Txt>
-          <Txt size="Small" color={qwhite}>
+          <Txt size="Small" color={qwhite} style={{ marginBottom: 5 }}>
             {`${movie.year}`}
           </Txt>
           <Txt size="Small" color={qwhite}>
