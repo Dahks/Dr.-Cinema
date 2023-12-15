@@ -45,6 +45,13 @@ const CinemaDetails = ({ navigation }: CinemaDetailsProps) => {
       });
   };
 
+  const call = () => {
+    const phoneURL = `tel:${cinema.phone}`;
+    Linking.openURL(phoneURL).catch((err) => {
+      console.error("Error:", err);
+    });
+  };
+
   StatusBar.setBarStyle("light-content", true);
 
   const screeningMovies: Movie[] =
@@ -82,7 +89,13 @@ const CinemaDetails = ({ navigation }: CinemaDetailsProps) => {
         >
           {cinema.websiteUrl}
         </Txt>
-        <Txt color={qwhite}>{cinema.phone}</Txt>
+        <Txt
+          color={qwhite}
+          onPress={call}
+          style={{ textDecorationLine: "underline" }}
+        >
+          {cinema.phone}
+        </Txt>
       </View>
 
       {movies.isLoading ? (
