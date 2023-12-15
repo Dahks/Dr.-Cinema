@@ -1,42 +1,24 @@
 import {
-  Button,
   StatusBar,
   View,
-  SafeAreaView,
   Text,
   TouchableHighlight,
   ScrollView,
-  BackHandler,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import Txt from "../../components/Txt";
 import { type CinemasProps } from "../../routes";
 import { black, white } from "../../styles/colors";
-
-import {
-  decremenetCounter,
-  incrementCounter,
-} from "../../redux/features/counter/counterSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import CinemaItem from "../../components/CinemaItem";
 import { cinemaSort, toCinema } from "../../models/Cinema";
-import type { APICinema, Cinema } from "../../models/Cinema";
-import ListItem from "../../components/ListItem";
-// import {
-//   getCinemasFromAPI,
-//   setCinemas,
-// } from "../../redux/features/counter/cinemaSlice";
 import { authenticate } from "../../redux/features/counter/authSlice";
 import AuthenticationStatus from "../../components/AuthenticationStatus";
 import { useGetCinemasQuery } from "../../services/cinemas";
 import { setSelectedCinema } from "../../redux/features/counter/selectionSlice";
 
 const Cinemas = ({ navigation, route }: CinemasProps) => {
-  // const [cinemas, setCinemas] = useState<Cinema[]>([]);
-
   const dispatch = useAppDispatch();
   const counter = useAppSelector((state) => state.counter.value);
-  // const cinema = useAppSelector((state) => state.cinema);
   const auth = useAppSelector((state) => state.auth);
 
   const cinema = useGetCinemasQuery(undefined, {
@@ -49,11 +31,6 @@ const Cinemas = ({ navigation, route }: CinemasProps) => {
     void dispatch(authenticate());
     console.log("authentication completed");
   }, []);
-
-  // useEffect(() => {
-  //   if (auth.isAuthenticated && auth.token)
-  //     void dispatch(getCinemasFromAPI(auth.token));
-  // }, [auth.isAuthenticated]);
 
   return (
     <View style={{ backgroundColor: black, display: "flex", flex: 1 }}>
