@@ -5,6 +5,7 @@ import {
   Image,
   ScrollView,
   TouchableWithoutFeedback,
+  TouchableOpacity,
 } from "react-native";
 import React, { useState } from "react";
 import Txt from "../../components/Txt";
@@ -16,6 +17,7 @@ import { black, qwhite, white } from "../../styles/colors";
 import { useAppSelector } from "../../redux/hooks";
 import type { Cinema } from "../../models/Cinema";
 import type { Movie } from "../../models/Movie";
+import MoviePosterModal from "../../components/MoviePosterModal";
 
 const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
   const movie = useAppSelector((state) => state.selection.movie) as Movie;
@@ -26,10 +28,16 @@ const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
   let showtimeNumber = 0;
 
   const [expandedPlot, setExpandedPlot] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   StatusBar.setBarStyle("light-content", true);
   return (
     <SafeAreaView style={styles.containerBackground}>
+      <MoviePosterModal
+        visible={modalVisible}
+        setVisible={setModalVisible}
+        poster={movie.poster}
+      />
       <ScrollView stickyHeaderIndices={[0, 1]}>
         {movie.trailer ? (
           <View
@@ -63,7 +71,11 @@ const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
             }}
           />
           <View style={{ flexDirection: "row" }}>
-            <View pointerEvents="none">
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible(true);
+              }}
+            >
               <Image
                 style={{
                   width: 100,
@@ -78,7 +90,7 @@ const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
                 }}
                 resizeMode="contain"
               />
-            </View>
+            </TouchableOpacity>
             <View
               style={{
                 flex: 1,
