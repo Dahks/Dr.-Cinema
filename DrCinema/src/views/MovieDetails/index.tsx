@@ -18,6 +18,10 @@ import { useAppSelector } from "../../redux/hooks";
 
 const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
   const movie = useAppSelector((state) => state.selection.movie);
+  const cinema: Cinema = useAppSelector((state) => state.selection.cinema);
+  const showtimes = movie.showtimes.find(
+    (c) => c.cinemaId === cinema.id
+  ).schedules;
 
   StatusBar.setBarStyle("light-content", true);
   return (
@@ -77,26 +81,15 @@ const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
             <Txt size="Large">Sýningartímar</Txt>
           </View>
         </View>
-        <ShowtimeItem
-          time="20:00"
-          purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
-        ></ShowtimeItem>
-        <ShowtimeItem
-          time="20:00"
-          purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
-        ></ShowtimeItem>
-        <ShowtimeItem
-          time="20:00"
-          purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
-        ></ShowtimeItem>
-        <ShowtimeItem
-          time="20:00"
-          purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
-        ></ShowtimeItem>
-        <ShowtimeItem
-          time="20:00"
-          purchaseUrl="http://kvikmyndahusio.azurewebsites.net/websales/show/794472/"
-        ></ShowtimeItem>
+        <View>
+          {showtimes.map((showtime) => (
+            <ShowtimeItem
+              // TODO: figure out key :)
+              time={showtime.time}
+              purchaseUrl={showtime.purchaseUrl}
+            />
+          ))}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
