@@ -67,8 +67,10 @@ const UpcomingMovieDetails = ({ navigation }: UpcomingMovieDetailsProps) => {
               </View>
             </View>
           </View>
-          <Txt color={qwhite}>{movie.genres}</Txt>
-          <Txt size="Small" numberOfLines={10} color={qwhite}>
+          <Txt color={"#7d7dff"} style={{ marginBottom: 10, marginTop: 10 }}>
+            {movie.genres}{" "}
+          </Txt>
+          <Txt size="Small" numberOfLines={30} color={qwhite}>
             {movie.plot}
           </Txt>
         </View>

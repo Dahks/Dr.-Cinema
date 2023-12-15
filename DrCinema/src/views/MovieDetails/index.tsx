@@ -22,6 +22,7 @@ const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
   const showtimes = movie.showtimes.find(
     (c) => c.cinemaId === cinema.id
   ).schedules;
+  let showtimeNumber = 0;
 
   StatusBar.setBarStyle("light-content", true);
   return (
@@ -73,8 +74,10 @@ const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
               </View>
             </View>
           </View>
-          <Txt color={qwhite}>{movie.genres}</Txt>
-          <Txt size="Small" numberOfLines={10} color={qwhite}>
+          <Txt color={"#7d7dff"} style={{ marginBottom: 10, marginTop: 10 }}>
+            {movie.genres}{" "}
+          </Txt>
+          <Txt size="Small" numberOfLines={30} color={qwhite}>
             {movie.plot}
           </Txt>
           <View style={{ alignItems: "center", marginTop: 15 }}>
@@ -84,7 +87,7 @@ const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
         <View>
           {showtimes.map((showtime) => (
             <ShowtimeItem
-              // TODO: figure out key :)
+              key={showtimeNumber++}
               time={showtime.time}
               purchaseUrl={showtime.purchaseUrl}
             />
