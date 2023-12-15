@@ -7,14 +7,15 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { type CinemasProps } from "../../routes";
-import { black, white } from "../../styles/colors";
+import { black, grey, qblack, qwhite, white } from "../../styles/colors";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import CinemaItem from "../../components/CinemaItem";
-import { cinemaSort, toCinema } from "../../models/Cinema";
+import { cinemaSort } from "../../models/Cinema";
 import { authenticate } from "../../redux/features/counter/authSlice";
 import AuthenticationStatus from "../../components/AuthenticationStatus";
 import { useGetCinemasQuery } from "../../services/cinemas";
 import { setSelectedCinema } from "../../redux/features/counter/selectionSlice";
+import Txt from "../../components/Txt";
 
 const Cinemas = ({ navigation, route }: CinemasProps) => {
   const dispatch = useAppDispatch();
@@ -59,7 +60,7 @@ const Cinemas = ({ navigation, route }: CinemasProps) => {
           navigation.navigate("Upcoming");
         }}
         style={{
-          backgroundColor: "#2B2B2B",
+          backgroundColor: qblack,
           alignItems: "center",
           padding: 20,
           borderRadius: 30,
@@ -68,10 +69,12 @@ const Cinemas = ({ navigation, route }: CinemasProps) => {
           position: "absolute",
           bottom: 40,
           borderWidth: 1,
-          borderColor: "#7E8084",
+          borderColor: qwhite,
         }}
       >
-        <Text style={{ color: white }}>Væntanlegar kvikmyndir</Text>
+        <Txt color={white} size="Small">
+          Væntanlegar kvikmyndir
+        </Txt>
       </TouchableHighlight>
     </View>
   );
