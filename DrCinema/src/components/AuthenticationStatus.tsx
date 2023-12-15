@@ -14,6 +14,10 @@ const AuthenticationStatus = () => {
         justifyContent: "center",
         alignItems: "center",
         marginTop: 4,
+        position: "absolute",
+        zIndex: 100,
+        right: 0,
+        left: 0,
       }}
     >
       <View

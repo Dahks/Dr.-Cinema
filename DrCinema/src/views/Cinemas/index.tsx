@@ -56,10 +56,12 @@ const Cinemas = ({ navigation, route }: CinemasProps) => {
   // }, [auth.isAuthenticated]);
 
   return (
-    <SafeAreaView style={{ backgroundColor: black, display: "flex", flex: 1 }}>
+    <View style={{ backgroundColor: black, display: "flex", flex: 1 }}>
       <AuthenticationStatus />
       {cinema.data && (
-        <ScrollView contentContainerStyle={{ paddingBottom: 110 }}>
+        <ScrollView
+          contentContainerStyle={{ paddingBottom: 110, paddingTop: 20 }}
+        >
           {cinema.data
             .slice()
             .sort(cinemaSort)
@@ -94,7 +96,7 @@ const Cinemas = ({ navigation, route }: CinemasProps) => {
       >
         <Text style={{ color: white }}>Væntanlegar kvikmyndir</Text>
       </TouchableHighlight>
-    </SafeAreaView>
+    </View>
   );
 };
 

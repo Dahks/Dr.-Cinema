@@ -39,7 +39,11 @@ const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
           <WebView source={{ uri: movie.trailer }} />
         </View>
       ) : (
-        <Txt size="Small">Enginn stikla í boði</Txt>
+        <View style={{ alignItems: "center", margin: 20 }}>
+          <Txt size="large" bold={true}>
+            Engin stikla í boði :(
+          </Txt>
+        </View>
       )}
       <ScrollView
         stickyHeaderIndices={[1]}
@@ -49,7 +53,12 @@ const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
         <View style={{ padding: 15, paddingTop: 5, backgroundColor: black }}>
           <View style={{ flexDirection: "row" }}>
             <Image
-              style={{ width: 100, height: 150 }}
+              style={{
+                width: 100,
+                height: 150,
+                borderRadius: 3,
+                marginLeft: -5,
+              }}
               source={{
                 uri: movie.poster,
               }}
