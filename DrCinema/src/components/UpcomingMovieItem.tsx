@@ -4,12 +4,32 @@ import Txt from "./Txt";
 import { qwhite } from "../styles/colors";
 import ListItem from "./ListItem";
 import { type UpcomingMovie } from "../models/Movie";
-// import MarqueeText from "react-native-marquee";
-// import AutoScroll from "@homielab/react-native-auto-scroll";
+import format from "date-fns/format";
+import { is } from "date-fns/locale";
 interface Props {
   upcomingMovie: UpcomingMovie;
   onPress: any;
 }
+
+const formatDate = (movieReleaseDate: string) => {
+  const releaseDate = new Date(movieReleaseDate);
+  const today = new Date();
+  const startOfToday = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate()
+  );
+
+  let prefix = "";
+  if (releaseDate.getTime() > startOfToday.getTime()) prefix = "Kemur út ";
+  else if (releaseDate.getTime() < startOfToday.getTime()) prefix = "Kom út ";
+  return (
+    prefix +
+    format(releaseDate, "do MMMM yyyy", {
+      locale: is,
+    })
+  );
+};
 
 const UpcomingMovieItem = ({ upcomingMovie, onPress }: Props) => {
   return (
@@ -39,7 +59,7 @@ const UpcomingMovieItem = ({ upcomingMovie, onPress }: Props) => {
             <Txt size="Large">{upcomingMovie.title}</Txt>
           )}
           <Txt size="Small" color={qwhite}>
-            {`${new Date(upcomingMovie.releaseDate).toDateString()}`}
+            {`${formatDate(upcomingMovie.releaseDate)}`}
           </Txt>
         </View>
       </View>
