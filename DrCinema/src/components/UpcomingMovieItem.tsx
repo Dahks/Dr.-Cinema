@@ -23,7 +23,9 @@ const UpcomingMovieItem = ({ upcomingMovie, onPress }: Props) => {
           style={{
             height: 80,
             width: 60,
-            borderRadius: 4,
+            marginRight: 5,
+            borderRadius: 7,
+            marginLeft: -5,
           }}
           source={{
             uri: upcomingMovie.poster,
@@ -31,26 +33,13 @@ const UpcomingMovieItem = ({ upcomingMovie, onPress }: Props) => {
           resizeMode="contain"
         ></Image>
         <View style={{ flexShrink: 1 }}>
-          {/* <Txt size="Large">{upcomingMovie.title}</Txt> */}
-          {/* <MarqueeText // from react-native-marquee
-            style={{ fontSize: 30, color: "#fff" }}
-            speed={0.5}
-            marqueeOnStart={true}
-            loop={true}
-            consecutive={true}
-            delay={0}
-          >
-            {upcomingMovie.title}
-          </MarqueeText> */}
           {upcomingMovie.title.length > 25 ? (
-            // <AutoScroll> // from react-native-auto-scroll
-            <Txt>{upcomingMovie.title}</Txt>
+            <Txt numberOfLines={2}>{upcomingMovie.title}</Txt>
           ) : (
-            // </AutoScroll>
             <Txt size="Large">{upcomingMovie.title}</Txt>
           )}
           <Txt size="Small" color={qwhite}>
-            {`Release: ${new Date(upcomingMovie.releaseDate).toDateString()}`}
+            {`${new Date(upcomingMovie.releaseDate).toDateString()}`}
           </Txt>
         </View>
       </View>

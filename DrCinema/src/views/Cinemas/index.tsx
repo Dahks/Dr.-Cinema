@@ -1,42 +1,25 @@
 import {
-  Button,
   StatusBar,
   View,
-  SafeAreaView,
   Text,
   TouchableHighlight,
   ScrollView,
-  BackHandler,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import Txt from "../../components/Txt";
 import { type CinemasProps } from "../../routes";
-import { black, white } from "../../styles/colors";
-
-import {
-  decremenetCounter,
-  incrementCounter,
-} from "../../redux/features/counter/counterSlice";
+import { black, grey, qblack, qwhite, white } from "../../styles/colors";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import CinemaItem from "../../components/CinemaItem";
-import { cinemaSort, toCinema } from "../../models/Cinema";
-import type { APICinema, Cinema } from "../../models/Cinema";
-import ListItem from "../../components/ListItem";
-// import {
-//   getCinemasFromAPI,
-//   setCinemas,
-// } from "../../redux/features/counter/cinemaSlice";
+import { cinemaSort } from "../../models/Cinema";
 import { authenticate } from "../../redux/features/counter/authSlice";
 import AuthenticationStatus from "../../components/AuthenticationStatus";
 import { useGetCinemasQuery } from "../../services/cinemas";
 import { setSelectedCinema } from "../../redux/features/counter/selectionSlice";
+import Txt from "../../components/Txt";
 
 const Cinemas = ({ navigation, route }: CinemasProps) => {
-  // const [cinemas, setCinemas] = useState<Cinema[]>([]);
-
   const dispatch = useAppDispatch();
   const counter = useAppSelector((state) => state.counter.value);
-  // const cinema = useAppSelector((state) => state.cinema);
   const auth = useAppSelector((state) => state.auth);
 
   const cinema = useGetCinemasQuery(undefined, {
@@ -50,16 +33,13 @@ const Cinemas = ({ navigation, route }: CinemasProps) => {
     console.log("authentication completed");
   }, []);
 
-  // useEffect(() => {
-  //   if (auth.isAuthenticated && auth.token)
-  //     void dispatch(getCinemasFromAPI(auth.token));
-  // }, [auth.isAuthenticated]);
-
   return (
-    <SafeAreaView style={{ backgroundColor: black, display: "flex", flex: 1 }}>
+    <View style={{ backgroundColor: black, display: "flex", flex: 1 }}>
       <AuthenticationStatus />
       {cinema.data && (
-        <ScrollView contentContainerStyle={{ paddingBottom: 110 }}>
+        <ScrollView
+          contentContainerStyle={{ paddingBottom: 110, paddingTop: 20 }}
+        >
           {cinema.data
             .slice()
             .sort(cinemaSort)
@@ -80,7 +60,7 @@ const Cinemas = ({ navigation, route }: CinemasProps) => {
           navigation.navigate("Upcoming");
         }}
         style={{
-          backgroundColor: "#2B2B2B",
+          backgroundColor: qblack,
           alignItems: "center",
           padding: 20,
           borderRadius: 30,
@@ -89,12 +69,14 @@ const Cinemas = ({ navigation, route }: CinemasProps) => {
           position: "absolute",
           bottom: 40,
           borderWidth: 1,
-          borderColor: "#7E8084",
+          borderColor: qwhite,
         }}
       >
-        <Text style={{ color: white }}>Væntanlegar kvikmyndir</Text>
+        <Txt color={white} size="Small">
+          Væntanlegar kvikmyndir
+        </Txt>
       </TouchableHighlight>
-    </SafeAreaView>
+    </View>
   );
 };
 

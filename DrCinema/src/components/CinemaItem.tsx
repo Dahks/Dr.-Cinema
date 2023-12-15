@@ -13,8 +13,10 @@ interface Props {
 const CinemaItem = ({ onPress, cinema }: Props) => {
   return (
     <ListItem onPress={onPress}>
-      <Txt size="Huge">{cinema.name}</Txt>
-      <Txt size="Small" color={qwhite}>
+      <Txt size="Huge" style={{ textAlign: "center" }}>
+        {cinema.name}
+      </Txt>
+      <Txt size="Small" color={qwhite} style={{ textAlign: "center" }}>
         {cinema.websiteUrl}
       </Txt>
     </ListItem>

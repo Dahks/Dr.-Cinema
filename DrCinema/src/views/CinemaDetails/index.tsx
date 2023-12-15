@@ -10,7 +10,7 @@ import Txt from "../../components/Txt";
 import { type CinemaDetailsProps } from "../../routes";
 import MovieItem from "../../components/MovieItem";
 import styles from "../../styles/styles";
-import { qwhite } from "../../styles/colors";
+import { qwhite, white } from "../../styles/colors";
 import { useGetMoviesQuery } from "../../services/movies";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import type { Movie } from "../../models/Movie";
@@ -35,7 +35,15 @@ const CinemaDetails = ({ navigation }: CinemaDetailsProps) => {
 
   return (
     <SafeAreaView style={styles.containerBackground}>
-      <View style={{ alignItems: "center" }}>
+      <View style={{ margin: 20 }}>
+        <Txt size="Small" numberOfLines={30} color={qwhite}>
+          {cinema.description}
+        </Txt>
+
+        <Txt color={qwhite} style={{ marginBottom: 10, marginTop: 10 }}>
+          {cinema.address}
+        </Txt>
+
         <Txt
           color={qwhite}
           onPress={() => {
@@ -43,17 +51,9 @@ const CinemaDetails = ({ navigation }: CinemaDetailsProps) => {
               console.error("An error occurred", err);
             });
           }}
-          style={{ textDecorationLine: "underline" }}
+          style={{ textDecorationLine: "underline", marginBottom: 10 }}
         >
           {cinema.websiteUrl}
-        </Txt>
-      </View>
-      <View style={{ margin: 20 }}>
-        <Txt size="Small" numberOfLines={10} color={qwhite}>
-          {cinema.description}
-        </Txt>
-        <Txt color={qwhite} style={{ marginBottom: 10 }}>
-          {cinema.address}
         </Txt>
         <Txt color={qwhite}>{cinema.phone}</Txt>
       </View>

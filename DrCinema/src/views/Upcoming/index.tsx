@@ -4,6 +4,8 @@ import {
   View,
   SafeAreaView,
   ScrollView,
+  ActivityIndicator,
+  StyleSheet,
 } from "react-native";
 import React from "react";
 import Txt from "../../components/Txt";
@@ -47,7 +49,10 @@ const Upcoming = ({ navigation, route }: UpcomingProps) => {
   return (
     <SafeAreaView style={styles.containerBackground}>
       {isLoading ? (
-        <Txt>Hleður væntanlegum myndum...</Txt>
+        <View style={upcomingStyles.loadingContainer}>
+          <ActivityIndicator size="large" color={"#7d7dff"} />
+          <Txt>Hleður væntanlegum myndum...</Txt>
+        </View>
       ) : error ? (
         <Txt>Villa</Txt>
       ) : (
@@ -58,3 +63,13 @@ const Upcoming = ({ navigation, route }: UpcomingProps) => {
 };
 
 export default Upcoming;
+
+const upcomingStyles = StyleSheet.create({
+  loadingContainer: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "rgba(0, 0, 0, 0.3)",
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 100,
+  },
+});
