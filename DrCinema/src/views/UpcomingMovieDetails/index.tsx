@@ -33,7 +33,11 @@ const UpcomingMovieDetails = ({ navigation }: UpcomingMovieDetailsProps) => {
           <WebView source={{ uri: movie.trailerUrl }} />
         </View>
       ) : (
-        <Txt size="Small">Engin stikla í boði</Txt>
+        <View style={{ alignItems: "center", margin: 20 }}>
+          <Txt size="large" bold={true}>
+            Engin stikla í boði :(
+          </Txt>
+        </View>
       )}
       <ScrollView
         stickyHeaderIndices={[1]}
