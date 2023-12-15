@@ -16,12 +16,23 @@ import type { Movie, UpcomingMovie } from "../models/Movie";
 import UpcomingMovieDetails from "../views/UpcomingMovieDetails";
 import { useAppSelector } from "../redux/hooks";
 
+// The RootStackParamList type should preferably be like this,
+// but as we're using redux for keeping a global state for the selection object
+// we don't pass the objects as props
+// type RootStackParamList = {
+//   Cinemas: undefined,
+//   CinemaDetails: { cinema: Cinema },
+//   MovieDetails: { movie: Movie },
+//   UpcomingMovieDetails: { upcomingMovie: UpcomingMovie },
+//   Upcoming: undefined,
+// };
+
 // eslint-disable-next-line
 type RootStackParamList = {
   Cinemas: undefined,
-  CinemaDetails: { cinema: Cinema },
-  MovieDetails: { movie: Movie },
-  UpcomingMovieDetails: { upcomingMovie: UpcomingMovie },
+  CinemaDetails: undefined,
+  MovieDetails: undefined,
+  UpcomingMovieDetails: undefined,
   Upcoming: undefined,
 };
 

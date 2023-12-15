@@ -30,7 +30,7 @@ const processDescription = (description: string | null) => {
   return description?.replace(/<br\s*\/?>|<b>/gi, "") ?? "";
 };
 
-export const cinemaSort = (a: Cinema, b: Cinema) => {
+export const cinemaSort = (a: Cinema, b: Cinema): number => {
   const icelandicAlphabet = "0123456789aábcdðeéfghiíjklmnoóprstuúvxyýzþæö";
 
   const aName = a.name.toLowerCase();
@@ -44,6 +44,7 @@ export const cinemaSort = (a: Cinema, b: Cinema) => {
       return aIndex - bIndex;
     }
   }
+  return 0;
 };
 
 export const toCinema = (apiCinema: APICinema) => {

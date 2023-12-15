@@ -18,7 +18,7 @@ import { type Cinema } from "../../models/Cinema";
 import { setSelectedMovie } from "../../redux/features/counter/selectionSlice";
 
 const CinemaDetails = ({ navigation }: CinemaDetailsProps) => {
-  const cinema: Cinema = useAppSelector((state) => state.selection.cinema);
+  const cinema = useAppSelector((state) => state.selection.cinema) as Cinema;
   const dispatch = useAppDispatch();
 
   const auth = useAppSelector((state) => state.auth);
