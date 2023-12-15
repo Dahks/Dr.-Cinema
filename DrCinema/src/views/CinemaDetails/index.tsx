@@ -2,8 +2,10 @@ import {
   View,
   StatusBar,
   SafeAreaView,
+  Platform,
   Linking,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
 import React from "react";
 import Txt from "../../components/Txt";
@@ -26,6 +28,23 @@ const CinemaDetails = ({ navigation }: CinemaDetailsProps) => {
     skip: !auth.isAuthenticated || !auth.token,
   });
 
+  const openGoogleMaps = () => {
+    const encodedAddress = encodeURIComponent(cinema.address);
+    const scheme = Platform.select({
+      ios: `maps:0,0?q=${encodedAddress}`,
+      android: `geo:0,0?q=${encodedAddress}`,
+    });
+    const url = Platform.select({
+      ios: scheme,
+      android: `google.navigation:q=${encodedAddress}`,
+    });
+
+    url &&
+      Linking.openURL(url).catch((err) => {
+        console.error("Error launching maps: ", err);
+      });
+  };
+
   StatusBar.setBarStyle("light-content", true);
 
   const screeningMovies: Movie[] =
@@ -40,7 +59,15 @@ const CinemaDetails = ({ navigation }: CinemaDetailsProps) => {
           {cinema.description}
         </Txt>
 
-        <Txt color={qwhite} style={{ marginBottom: 10, marginTop: 10 }}>
+        <Txt
+          onPress={openGoogleMaps}
+          color={qwhite}
+          style={{
+            textDecorationLine: "underline",
+            marginBottom: 10,
+            marginTop: 10,
+          }}
+        >
           {cinema.address}
         </Txt>
 
