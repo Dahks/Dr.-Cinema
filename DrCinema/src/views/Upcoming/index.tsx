@@ -5,8 +5,10 @@ import {
   ScrollView,
   ActivityIndicator,
   StyleSheet,
+  SafeAreaView,
+  TextInput,
 } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Txt from "../../components/Txt";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { type UpcomingProps } from "../../routes";
@@ -19,6 +21,7 @@ import {
   type UpcomingMovie,
 } from "../../models/Movie";
 import { setSelectedMovie } from "../../redux/features/selectionSlice";
+import { qblack, grey, white } from "../../styles/colors";
 
 const Upcoming = ({ navigation, route }: UpcomingProps) => {
   StatusBar.setBarStyle("light-content", true);
@@ -29,8 +32,27 @@ const Upcoming = ({ navigation, route }: UpcomingProps) => {
     skip: !auth.isAuthenticated || !auth.token, // Skip if not authenticated or token is not available
   });
 
+  const [search, setSearch] = useState<string>("");
+  const [searchItems, setSearchItems] = useState<UpcomingMovie[]>(data ?? []);
+
+  useEffect(() => {
+    if (searchItems.length === 0) setSearchItems(data ?? []);
+  }, [data]);
+
+  const filterItems = () => {
+    const formattedQuery = search.toLowerCase();
+    const filteredData = data?.filter((upcomingMovie) => {
+      return upcomingMovie.title.toLowerCase().includes(formattedQuery);
+    });
+    setSearchItems(filteredData ?? []);
+  };
+
+  useEffect(() => {
+    filterItems();
+  }, [search]);
+
   const renderUpComingMovies = () => {
-    return data
+    return searchItems
       ?.slice()
       .sort(releaseDateSort)
       .map((movie: UpcomingMovie) => (
@@ -55,12 +77,35 @@ const Upcoming = ({ navigation, route }: UpcomingProps) => {
       ) : error ? (
         <Txt>Villa</Txt>
       ) : (
-        <ScrollView
-          contentContainerStyle={{ paddingBottom: 80 }}
-          showsHorizontalScrollIndicator={false}
-        >
-          {renderUpComingMovies()}
-        </ScrollView>
+        <>
+          <View
+            style={{
+              backgroundColor: qblack,
+              borderColor: grey,
+              borderWidth: 2,
+              borderStyle: "solid",
+              borderRadius: 4,
+              margin: 8,
+              paddingHorizontal: 8,
+              paddingVertical: 4,
+            }}
+          >
+            <TextInput
+              style={{ color: white, fontSize: 18 }}
+              placeholder="Leita..."
+              value={search}
+              onChangeText={(text) => {
+                setSearch(text);
+              }}
+            />
+          </View>
+          <ScrollView
+            contentContainerStyle={{ paddingBottom: 80 }}
+            showsHorizontalScrollIndicator={false}
+          >
+            {renderUpComingMovies()}
+          </ScrollView>
+        </>
       )}
     </View>
   );
