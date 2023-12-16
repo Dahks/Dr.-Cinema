@@ -58,7 +58,7 @@ const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
           </View>
         )}
         {!movie.trailer && <View style={{ marginTop: 30 }}></View>}
-
+        {/* negative values for nice effect :) */}
         <View style={{ paddingHorizontal: 15, marginTop: -40, zIndex: 10 }}>
           <View
             style={{

@@ -39,7 +39,6 @@ export const {
   deselectCinema,
 } = selectionSlice.actions;
 
-// Other code such as selectors can use the imported `RootState` type
 export const selectMovie = (state: RootState) => state.selection.movie;
 export const selectCinema = (state: RootState) => state.selection.cinema;
 
