@@ -5,6 +5,7 @@ import {
   Image,
   ScrollView,
   TouchableWithoutFeedback,
+  TouchableOpacity,
 } from "react-native";
 import React, { useState } from "react";
 import Txt from "../../components/Txt";
@@ -12,23 +13,31 @@ import { type MovieDetailsProps } from "../../routes";
 import ShowtimeItem from "../../components/ShowtimeItem";
 import styles from "../../styles/styles";
 import WebView from "react-native-webview";
-import { black, qblack, qwhite, white } from "../../styles/colors";
-import { type Movie } from "../../models/Movie";
+import { black, qwhite, white } from "../../styles/colors";
 import { useAppSelector } from "../../redux/hooks";
+import type { Cinema } from "../../models/Cinema";
+import type { Movie } from "../../models/Movie";
+import MoviePosterModal from "../../components/MoviePosterModal";
 
 const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
-  const movie = useAppSelector((state) => state.selection.movie);
-  const cinema: Cinema = useAppSelector((state) => state.selection.cinema);
+  const movie = useAppSelector((state) => state.selection.movie) as Movie;
+  const cinema = useAppSelector((state) => state.selection.cinema) as Cinema;
   const showtimes = movie.showtimes.find(
     (c) => c.cinemaId === cinema.id
-  ).schedules;
+  )?.schedules;
   let showtimeNumber = 0;
 
   const [expandedPlot, setExpandedPlot] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   StatusBar.setBarStyle("light-content", true);
   return (
     <SafeAreaView style={styles.containerBackground}>
+      <MoviePosterModal
+        visible={modalVisible}
+        setVisible={setModalVisible}
+        poster={movie.poster}
+      />
       <ScrollView stickyHeaderIndices={[0, 1]}>
         {movie.trailer ? (
           <View
@@ -37,7 +46,6 @@ const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
               ...styles.border,
               position: "absolute",
               width: "100%",
-              // top: positionX,
             }}
           >
             <WebView source={{ uri: movie.trailer }} />
@@ -63,7 +71,11 @@ const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
             }}
           />
           <View style={{ flexDirection: "row" }}>
-            <View pointerEvents="none">
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible(true);
+              }}
+            >
               <Image
                 style={{
                   width: 100,
@@ -78,7 +90,7 @@ const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
                 }}
                 resizeMode="contain"
               />
-            </View>
+            </TouchableOpacity>
             <View
               style={{
                 flex: 1,
@@ -130,7 +142,7 @@ const MovieDetails = ({ navigation, route }: MovieDetailsProps) => {
           </View>
         </View>
         <View>
-          {showtimes.map((showtime) => (
+          {showtimes?.map((showtime) => (
             <ShowtimeItem
               key={showtimeNumber++}
               time={showtime.time}

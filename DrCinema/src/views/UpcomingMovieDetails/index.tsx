@@ -1,26 +1,41 @@
 import {
-  Button,
   View,
   StatusBar,
   SafeAreaView,
   Image,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import Txt from "../../components/Txt";
 import { type UpcomingMovieDetailsProps } from "../../routes";
-import ShowtimeItem from "../../components/ShowtimeItem";
 import styles from "../../styles/styles";
 import WebView from "react-native-webview";
-import { black, qblack, qwhite, white } from "../../styles/colors";
+import { black, qwhite, white } from "../../styles/colors";
 import { useAppSelector } from "../../redux/hooks";
+import type { UpcomingMovie } from "../../models/Movie";
+import MoviePosterModal from "../../components/MoviePosterModal";
 
 const UpcomingMovieDetails = ({ navigation }: UpcomingMovieDetailsProps) => {
-  const movie = useAppSelector((state) => state.selection.movie);
+  // This is super ugly (... as UpcomingMovie), mapping the type of movie, which could be Movie | UpcomingMovie | undefined, to strictly be UpcomingMovie.
+  // however, there is no clean way of doing this by having a selectionSlice.
+  // The best solution here is to input the upcoming movie as a prop into this component,
+  // which ensures that an UpcomingMovie object is being passed into this component
+
+  const movie = useAppSelector(
+    (state) => state.selection.movie
+  ) as UpcomingMovie;
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
 
   StatusBar.setBarStyle("light-content", true);
+
   return (
     <SafeAreaView style={styles.containerBackground}>
+      <MoviePosterModal
+        visible={modalVisible}
+        setVisible={setModalVisible}
+        poster={movie.poster}
+      />
       <ScrollView stickyHeaderIndices={[0, 1]}>
         {movie.trailerUrl ? (
           <View
@@ -29,7 +44,6 @@ const UpcomingMovieDetails = ({ navigation }: UpcomingMovieDetailsProps) => {
               ...styles.border,
               position: "absolute",
               width: "100%",
-              // top: positionX,
             }}
           >
             <WebView source={{ uri: movie.trailerUrl }} />
@@ -55,7 +69,11 @@ const UpcomingMovieDetails = ({ navigation }: UpcomingMovieDetailsProps) => {
             }}
           />
           <View style={{ flexDirection: "row" }}>
-            <View pointerEvents="none">
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible(true);
+              }}
+            >
               <Image
                 style={{
                   width: 100,
@@ -70,7 +88,7 @@ const UpcomingMovieDetails = ({ navigation }: UpcomingMovieDetailsProps) => {
                 }}
                 resizeMode="contain"
               />
-            </View>
+            </TouchableOpacity>
             <View
               style={{
                 flex: 1,

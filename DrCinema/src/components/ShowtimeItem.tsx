@@ -1,7 +1,6 @@
-import { StyleSheet, View, Linking } from "react-native";
+import { View, Linking } from "react-native";
 import React from "react";
 import Txt from "./Txt";
-import { qwhite } from "../styles/colors";
 import ListItem from "./ListItem";
 
 interface Props {

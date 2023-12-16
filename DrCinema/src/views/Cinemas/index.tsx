@@ -1,25 +1,18 @@
-import {
-  StatusBar,
-  View,
-  Text,
-  TouchableHighlight,
-  ScrollView,
-} from "react-native";
-import React, { useEffect, useState } from "react";
+import { StatusBar, View, TouchableHighlight, ScrollView } from "react-native";
+import React, { useEffect } from "react";
 import { type CinemasProps } from "../../routes";
-import { black, grey, qblack, qwhite, white } from "../../styles/colors";
+import { black, qblack, qwhite, white } from "../../styles/colors";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import CinemaItem from "../../components/CinemaItem";
 import { cinemaSort } from "../../models/Cinema";
-import { authenticate } from "../../redux/features/counter/authSlice";
+import { authenticate } from "../../redux/features/authSlice";
 import AuthenticationStatus from "../../components/AuthenticationStatus";
 import { useGetCinemasQuery } from "../../services/cinemas";
-import { setSelectedCinema } from "../../redux/features/counter/selectionSlice";
+import { setSelectedCinema } from "../../redux/features/selectionSlice";
 import Txt from "../../components/Txt";
 
 const Cinemas = ({ navigation, route }: CinemasProps) => {
   const dispatch = useAppDispatch();
-  const counter = useAppSelector((state) => state.counter.value);
   const auth = useAppSelector((state) => state.auth);
 
   const cinema = useGetCinemasQuery(undefined, {

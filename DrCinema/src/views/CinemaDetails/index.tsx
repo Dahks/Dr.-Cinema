@@ -2,29 +2,55 @@ import {
   View,
   StatusBar,
   SafeAreaView,
+  Platform,
   Linking,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
 import React from "react";
 import Txt from "../../components/Txt";
 import { type CinemaDetailsProps } from "../../routes";
 import MovieItem from "../../components/MovieItem";
 import styles from "../../styles/styles";
-import { qwhite, white } from "../../styles/colors";
+import { qwhite } from "../../styles/colors";
 import { useGetMoviesQuery } from "../../services/movies";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import type { Movie } from "../../models/Movie";
 import { type Cinema } from "../../models/Cinema";
-import { setSelectedMovie } from "../../redux/features/counter/selectionSlice";
+import { setSelectedMovie } from "../../redux/features/selectionSlice";
 
 const CinemaDetails = ({ navigation }: CinemaDetailsProps) => {
-  const cinema: Cinema = useAppSelector((state) => state.selection.cinema);
+  const cinema = useAppSelector((state) => state.selection.cinema) as Cinema;
   const dispatch = useAppDispatch();
 
   const auth = useAppSelector((state) => state.auth);
   const movies = useGetMoviesQuery(undefined, {
     skip: !auth.isAuthenticated || !auth.token,
   });
+
+  const openGoogleMaps = () => {
+    const encodedAddress = encodeURIComponent(cinema.address);
+    const scheme = Platform.select({
+      ios: `maps:0,0?q=${encodedAddress}`,
+      android: `geo:0,0?q=${encodedAddress}`,
+    });
+    const url = Platform.select({
+      ios: scheme,
+      android: `google.navigation:q=${encodedAddress}`,
+    });
+
+    url &&
+      Linking.openURL(url).catch((err) => {
+        console.error("Error launching maps: ", err);
+      });
+  };
+
+  const call = () => {
+    const phoneURL = `tel:${cinema.phone}`;
+    Linking.openURL(phoneURL).catch((err) => {
+      console.error("Error:", err);
+    });
+  };
 
   StatusBar.setBarStyle("light-content", true);
 
@@ -40,7 +66,15 @@ const CinemaDetails = ({ navigation }: CinemaDetailsProps) => {
           {cinema.description}
         </Txt>
 
-        <Txt color={qwhite} style={{ marginBottom: 10, marginTop: 10 }}>
+        <Txt
+          onPress={openGoogleMaps}
+          color={qwhite}
+          style={{
+            textDecorationLine: "underline",
+            marginBottom: 10,
+            marginTop: 10,
+          }}
+        >
           {cinema.address}
         </Txt>
 
@@ -55,7 +89,13 @@ const CinemaDetails = ({ navigation }: CinemaDetailsProps) => {
         >
           {cinema.websiteUrl}
         </Txt>
-        <Txt color={qwhite}>{cinema.phone}</Txt>
+        <Txt
+          color={qwhite}
+          onPress={call}
+          style={{ textDecorationLine: "underline" }}
+        >
+          {cinema.phone}
+        </Txt>
       </View>
 
       {movies.isLoading ? (

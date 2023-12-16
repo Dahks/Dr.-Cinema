@@ -1,4 +1,3 @@
-import { StyleSheet, View } from "react-native";
 import React from "react";
 import Txt from "./Txt";
 import { qwhite } from "../styles/colors";

@@ -1,7 +1,6 @@
 import { StyleSheet, TouchableHighlight, View } from "react-native";
 import React from "react";
-import { grey, qblack, white } from "../styles/colors";
-import styles from "../styles/styles";
+import { grey, qblack } from "../styles/colors";
 
 interface Props {
   children: any;

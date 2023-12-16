@@ -1,7 +1,7 @@
-import { StyleSheet, View, Image } from "react-native";
+import { View, Image } from "react-native";
 import React from "react";
 import Txt from "./Txt";
-import { qwhite } from "../styles/colors";
+import { qwhite, white } from "../styles/colors";
 import ListItem from "./ListItem";
 import type { Movie } from "../models/Movie";
 
@@ -25,6 +25,8 @@ const MovieItem = ({ movie, onPress }: Props) => {
             marginRight: 5,
             borderRadius: 7,
             marginLeft: -5,
+            borderWidth: 0.2,
+            borderColor: white,
           }}
           source={{
             uri: movie.poster,
